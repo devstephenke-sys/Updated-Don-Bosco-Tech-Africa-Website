@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Phone,
   Mail,
@@ -16,12 +17,23 @@ export function Footer() {
     <footer className="bg-slate-900 text-slate-300 border-t border-slate-800">
       {/* Top Banner / Continental Strip */}
       <div className="bg-[#00274d] text-white py-8 px-4 sm:px-6 lg:px-8 border-b border-blue-950">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div>
-            <h3 className="text-xl font-bold text-white tracking-tight">Don Bosco Tech Africa</h3>
-            <p className="text-xs text-blue-200 mt-0.5">
-              Coordinating 119 TVET Centres across 35 African Countries & Madagascar
-            </p>
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4">
+            <div className="bg-white p-2 rounded-2xl shadow-sm">
+              <Image
+                src="/images/logo.png"
+                alt="Don Bosco Tech Africa Logo"
+                width={140}
+                height={46}
+                className="h-11 w-auto object-contain"
+              />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white tracking-tight">Don Bosco Tech Africa</h3>
+              <p className="text-xs text-blue-200 mt-0.5">
+                Coordinating 119 TVET Centres across 35 African Countries & Madagascar
+              </p>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">

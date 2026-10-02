@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   X,
   ChevronRight,
@@ -45,12 +46,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {/* Top Header */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100 sticky top-0 bg-white z-10">
         <Link href="/" onClick={onClose} className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-sm">
-            DB
-          </div>
-          <div>
-            <span className="font-extrabold text-slate-900 text-sm tracking-tight block">Don Bosco Tech Africa</span>
-            <span className="text-[10px] text-orange-600 font-bold tracking-wider uppercase block">Continental TVET Network</span>
+          <Image
+            src="/images/logo.png"
+            alt="Don Bosco Tech Africa Logo"
+            width={120}
+            height={40}
+            className="h-10 w-auto object-contain"
+          />
+          <div className="border-l border-slate-200 pl-2.5">
+            <span className="font-extrabold text-slate-900 text-xs tracking-tight block">Don Bosco Tech Africa</span>
+            <span className="text-[9px] text-orange-600 font-bold tracking-wider uppercase block">Continental TVET</span>
           </div>
         </Link>
 

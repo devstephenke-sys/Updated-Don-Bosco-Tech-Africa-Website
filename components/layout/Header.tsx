@@ -37,21 +37,23 @@ export function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo Branding */}
           <Link href="/" className="flex items-center gap-3 group focus:outline-none">
-            <div className="relative w-11 h-11 md:w-12 md:h-12 rounded-2xl bg-gradient-to-br from-blue-700 via-blue-800 to-slate-900 flex items-center justify-center text-white font-extrabold text-xl shadow-md group-hover:scale-105 transition-transform duration-200">
-              <span className="tracking-tighter">DB</span>
-              <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-orange-500 border-2 border-white flex items-center justify-center text-[8px] font-black text-white">
-                ★
-              </div>
+            <div className="relative h-12 w-auto flex items-center group-hover:scale-105 transition-transform duration-200">
+              <Image
+                src="/images/logo.png"
+                alt="Don Bosco Tech Africa Logo"
+                width={160}
+                height={52}
+                className="h-11 md:h-12 w-auto object-contain"
+                priority
+              />
             </div>
 
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-slate-900 text-base md:text-lg tracking-tight group-hover:text-blue-600 transition-colors">
-                  Don Bosco Tech Africa
-                </span>
-              </div>
+            <div className="hidden sm:block border-l border-slate-200 pl-3">
+              <span className="font-extrabold text-slate-900 text-sm md:text-base tracking-tight block group-hover:text-blue-600 transition-colors leading-tight">
+                Don Bosco Tech Africa
+              </span>
               <span className="text-[10px] md:text-xs text-orange-600 font-bold tracking-wider uppercase block">
-                Continental TVET Platform
+                Continental TVET Network
               </span>
             </div>
           </Link>
