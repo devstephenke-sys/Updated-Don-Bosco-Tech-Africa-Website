@@ -1,0 +1,55 @@
+import { Opportunity } from './types';
+
+export const opportunities: Opportunity[] = [
+  {
+    id: 'senior-m-e-officer-nairobi',
+    slug: 'senior-monitoring-evaluation-officer',
+    title: 'Senior Monitoring, Evaluation and Learning (MEL) Officer',
+    category: 'Job Vacancy',
+    department: 'Programs & Quality Directorate',
+    location: 'Nairobi, Kenya (DBTA Continental Secretariat)',
+    deadline: '2026-11-15',
+    status: 'OPEN',
+    summary: 'Don Bosco Tech Africa is seeking an experienced Senior Monitoring, Evaluation, and Learning (MEL) Officer to oversee multi-country project telemetry, graduate tracer analytics, and donor reporting across 15 Salesian Provinces.',
+    requirements: [
+      'Master’s degree in Monitoring & Evaluation, Statistics, Project Management, Education, or related social science field',
+      'Minimum 5 years of professional experience managing MEL frameworks in international development or continental educational programmes',
+      'Demonstrated expertise in quantitative data analysis, digital survey platforms (Kobo, ODK), and database management',
+      'Fluency in English is required; professional working proficiency in French is highly advantageous',
+    ],
+    applicationInstructions: 'Interested candidates should submit a comprehensive CV and cover letter addressed to the Executive Director at careers@dbtechafrica.org with the subject line "Senior MEL Officer Application".',
+  },
+  {
+    id: 'curriculum-expert-solar-pv',
+    slug: 'curriculum-expert-solar-pv',
+    title: 'Consultancy: Solar Photovoltaic Curriculum Harmonization Expert',
+    category: 'Consultancy',
+    department: 'Green TVET Project',
+    location: 'Regional / Hybrid (West & East Africa)',
+    deadline: '2026-10-30',
+    status: 'OPEN',
+    summary: 'Seeking a short-term TVET Curriculum Consultant to review and harmonize competency-based Solar PV training modules across Anglophone and Francophone Salesian TVET institutions.',
+    requirements: [
+      'Advanced degree in Renewable Energy Engineering, Electrical Engineering, or Technical Education Curriculum Development',
+      'Proven track record in developing accredited TVET curricula aligned with national qualification frameworks in Africa',
+      'Bilingual proficiency (English and French)',
+    ],
+    applicationInstructions: 'Submit technical proposal, financial quotation, and samples of previous TVET curriculum work to procurement@dbtechafrica.org.',
+  },
+  {
+    id: 'supply-solar-training-benches',
+    slug: 'supply-solar-training-benches',
+    title: 'Expression of Interest: Supply & Commissioning of Didactic Solar Training Benches',
+    category: 'Procurement / Tender',
+    department: 'Procurement Unit',
+    location: 'Selected Salesian TVET Centres in West Africa',
+    deadline: '2026-08-15',
+    status: 'CLOSED',
+    summary: 'Procurement and delivery of industrial-grade didactic solar photovoltaic training benches, inverters, and testing instruments for partner institutions.',
+    requirements: [
+      'Registered manufacturer or certified distributor of international TVET educational training equipment',
+      'Minimum 3 reference contracts of similar didactic equipment supply in Sub-Saharan Africa',
+    ],
+    applicationInstructions: 'This procurement process is officially closed. Evaluation of submitted tenders is currently underway.',
+  },
+];
