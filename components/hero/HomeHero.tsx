@@ -1,289 +1,430 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import {
-  ArrowRight,
-  ChevronRight,
-  ChevronDown,
-  Building2,
-  Leaf,
-  Briefcase,
-  Handshake,
-  Award,
-  Sparkles,
-} from 'lucide-react';
+import { ArrowRight, MapPin, Users, GraduationCap, ChevronDown } from 'lucide-react';
 
-const QUICK_GATEWAYS = [
-  {
-    icon: Building2,
-    title: '119 TVET Centres',
-    subtitle: '35 African Nations',
-    href: '/network',
-    color: '#003366',
-  },
-  {
-    icon: Leaf,
-    title: 'Green & Solar TVET',
-    subtitle: 'Clean energy trades',
-    href: '/what-we-do/green-tvet',
-    color: '#2D7D46',
-  },
-  {
-    icon: Briefcase,
-    title: 'Youth Employment',
-    subtitle: 'Job placement & RPL',
-    href: '/what-we-do/employability-jso',
-    color: '#D32F2F',
-  },
-  {
-    icon: Handshake,
-    title: 'Strategic Partners',
-    subtitle: 'Donors & institutions',
-    href: '/contact',
-    color: '#7B5EA7',
-  },
+/* ─── Rotating headline words ─── */
+const WORDS = ['Empower', 'Transform', 'Elevate', 'Inspire', 'Equip'];
+const WORD_INTERVAL = 2800;
+
+/* ─────────────────────────────────────────────────────────────
+   Africa map: SVG viewBox 0 0 1000 1100
+   Country dots positioned by approximate lat/lon mapped to
+   the Africa outline SVG coordinate space.
+   cx = (lon + 18) / 82 * 1000   (Africa spans ~-18°W to ~52°E lon → 70°)
+   cy = (37 - lat) / 74 * 1100   (Africa spans ~-35°S to ~37°N lat → 72°)
+   ──────────────────────────────────────────────────────────── */
+interface Country {
+  name: string;
+  centres: number;
+  trade?: string;
+  cx: number;
+  cy: number;
+}
+
+const DBTA_COUNTRIES: Country[] = [
+  { name: 'Morocco',          centres: 2,  trade: 'Automotive, IT',           cx: 310, cy:  62 },
+  { name: 'Algeria',          centres: 1,  trade: 'Construction',              cx: 390, cy: 115 },
+  { name: 'Tunisia',          centres: 1,  trade: 'Hospitality',               cx: 450, cy:  80 },
+  { name: 'Egypt',            centres: 2,  trade: 'IT, Mechatronics',          cx: 600, cy: 145 },
+  { name: 'Mauritania',       centres: 1,  trade: 'Agriculture',               cx: 160, cy: 220 },
+  { name: 'Mali',             centres: 2,  trade: 'Solar, Construction',       cx: 295, cy: 270 },
+  { name: 'Niger',            centres: 1,  trade: 'Agriculture, Solar',        cx: 420, cy: 265 },
+  { name: 'Chad',             centres: 2,  trade: 'Construction, Agriculture', cx: 545, cy: 295 },
+  { name: 'Sudan',            centres: 2,  trade: 'Agriculture, Welding',      cx: 640, cy: 265 },
+  { name: 'Senegal',          centres: 3,  trade: 'Automotive, IT',            cx: 120, cy: 310 },
+  { name: 'Guinea',           centres: 2,  trade: 'Mining, Construction',      cx: 145, cy: 380 },
+  { name: 'Sierra Leone',     centres: 1,  trade: 'Agriculture',               cx: 130, cy: 420 },
+  { name: 'Liberia',          centres: 1,  trade: 'Agriculture, Construction', cx: 155, cy: 450 },
+  { name: 'Côte d\'Ivoire',   centres: 3,  trade: 'Agriculture, Hospitality',  cx: 215, cy: 435 },
+  { name: 'Ghana',            centres: 4,  trade: 'IT, Electrical, Solar',     cx: 265, cy: 450 },
+  { name: 'Togo',             centres: 2,  trade: 'Agriculture, Welding',      cx: 305, cy: 440 },
+  { name: 'Benin',            centres: 2,  trade: 'Agriculture, Construction', cx: 330, cy: 435 },
+  { name: 'Nigeria',          centres: 6,  trade: 'Electrical, IT, Solar',     cx: 380, cy: 400 },
+  { name: 'Cameroon',         centres: 4,  trade: 'Agriculture, Construction', cx: 460, cy: 420 },
+  { name: 'Ethiopia',         centres: 5,  trade: 'Garment, Hospitality, IT',  cx: 680, cy: 355 },
+  { name: 'South Sudan',      centres: 2,  trade: 'Agriculture, Construction', cx: 600, cy: 390 },
+  { name: 'DR Congo',         centres: 8,  trade: 'Mechanics, Agriculture',    cx: 530, cy: 490 },
+  { name: 'Uganda',           centres: 5,  trade: 'ICT, Agriculture, Solar',   cx: 630, cy: 440 },
+  { name: 'Kenya',            centres: 7,  trade: 'Solar, IT, Hospitality',    cx: 680, cy: 465 },
+  { name: 'Tanzania',         centres: 6,  trade: 'Agriculture, Fishing',      cx: 660, cy: 540 },
+  { name: 'Rwanda',           centres: 3,  trade: 'ICT, Hospitality, Solar',   cx: 608, cy: 480 },
+  { name: 'Burundi',          centres: 2,  trade: 'Agriculture, Welding',      cx: 595, cy: 510 },
+  { name: 'Angola',           centres: 3,  trade: 'Construction, Agriculture', cx: 465, cy: 570 },
+  { name: 'Zambia',           centres: 3,  trade: 'Mining, Agriculture',       cx: 565, cy: 590 },
+  { name: 'Mozambique',       centres: 3,  trade: 'Agriculture, Construction', cx: 650, cy: 610 },
+  { name: 'Zimbabwe',         centres: 2,  trade: 'Agriculture, Mechanics',    cx: 580, cy: 635 },
+  { name: 'Malawi',           centres: 2,  trade: 'Agriculture, Tailoring',    cx: 635, cy: 580 },
+  { name: 'South Africa',     centres: 3,  trade: 'Electrical, IT, Welding',   cx: 545, cy: 760 },
+  { name: 'Madagascar',       centres: 4,  trade: 'Agriculture, Tailoring',    cx: 760, cy: 650 },
+  { name: 'Burkina Faso',     centres: 2,  trade: 'Solar, Agriculture',        cx: 270, cy: 335 },
 ];
 
-export function HomeHero() {
-  const [mounted, setMounted] = useState(false);
-
+/* ─── Animated counter ─── */
+function useCounter(target: number, duration = 2000, start = false) {
+  const [count, setCount] = useState(0);
+  const frame = useRef<number>(0);
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!start) return;
+    let startTime: number | null = null;
+    const step = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const p = Math.min((ts - startTime) / duration, 1);
+      setCount(Math.round((1 - (1 - p) ** 2) * target));
+      if (p < 1) frame.current = requestAnimationFrame(step);
+    };
+    frame.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame.current);
+  }, [target, duration, start]);
+  return count;
+}
 
-  const scrollToNextSection = () => {
-    const el = document.getElementById('who-we-are');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+/* ─── Floating ambient particles ─── */
+const PARTICLE_SEED = Array.from({ length: 18 }, (_, i) => ({
+  left: ((i * 37 + 11) % 97).toFixed(1),
+  top:  ((i * 53 + 7)  % 93).toFixed(1),
+  w:    3 + ((i * 7) % 5),
+  delay: ((i * 13) % 8).toFixed(1),
+  dur:   (6 + ((i * 11) % 9)).toFixed(1),
+  op:    (0.12 + ((i * 3) % 20) * 0.01).toFixed(2),
+}));
+
+/* ─── Africa SVG Map ─── */
+interface MapProps {
+  mounted: boolean;
+}
+function AfricaMap({ mounted }: MapProps) {
+  const [hovered, setHovered] = useState<Country | null>(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent, country: Country) => {
+    if (!svgRef.current) return;
+    const rect = svgRef.current.getBoundingClientRect();
+    setTooltipPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+    setHovered(country);
   };
 
   return (
-    <section
-      className="relative min-h-[calc(100vh-125px)] flex flex-col justify-between bg-white overflow-hidden border-b border-slate-200/80"
-      aria-label="Don Bosco Tech Africa Landing"
-    >
-      {/* Subtle ambient lighting gradients */}
-      <div
-        className="absolute top-0 right-0 w-[45vw] h-[45vw] max-w-[650px] max-h-[650px] rounded-full pointer-events-none opacity-40 blur-3xl -z-10"
-        style={{
-          background: 'radial-gradient(circle, rgba(0, 51, 102, 0.08) 0%, transparent 70%)',
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full pointer-events-none opacity-30 blur-3xl -z-10"
-        style={{
-          background: 'radial-gradient(circle, rgba(211, 47, 47, 0.06) 0%, transparent 70%)',
-        }}
-      />
+    <div className="relative w-full h-full flex items-center justify-center">
+      {/* Glow behind map */}
+      <div className="absolute inset-0 pointer-events-none" style={{
+        background: 'radial-gradient(ellipse 70% 70% at 50% 50%, rgba(0,80,200,0.12) 0%, transparent 70%)',
+      }} />
 
-      {/* Decorative Grid Texture */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 1px 1px, #003366 1px, transparent 0)',
-          backgroundSize: '28px 28px',
-        }}
-      />
+      <svg
+        ref={svgRef}
+        viewBox="60 30 840 980"
+        className={`w-full h-full max-h-[88vh] transition-all duration-1000 drop-shadow-xl ${
+          mounted ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+        }`}
+        style={{ transitionDelay: '600ms' }}
+        aria-label="Africa map showing DBTA presence"
+      >
+        {/* Africa land shape — simplified outline */}
+        <path
+          d="
+            M 440 55  L 490 48  L 560 60  L 610 45  L 660 52  L 700 70
+            L 730 95  L 750 130 L 755 165 L 750 195 L 760 225 L 780 255
+            L 790 290 L 800 340 L 810 390 L 815 430 L 800 470 L 780 500
+            L 760 530 L 745 560 L 730 585 L 720 615 L 700 645 L 680 670
+            L 660 690 L 645 710 L 620 730 L 600 750 L 580 765 L 560 785
+            L 545 800 L 535 820 L 530 840 L 535 860 L 545 880 L 555 900
+            L 545 925 L 520 940 L 490 945 L 455 935 L 430 910 L 415 885
+            L 400 860 L 390 830 L 380 800 L 365 770 L 345 745 L 315 720
+            L 295 700 L 280 675 L 265 650 L 250 615 L 235 580 L 215 545
+            L 200 510 L 190 475 L 175 445 L 165 415 L 155 390 L 145 360
+            L 140 325 L 138 295 L 140 265 L 148 240 L 155 215 L 150 190
+            L 140 165 L 135 140 L 130 115 L 140 92  L 155 75  L 175 65
+            L 210 58  L 255 52  L 300 48  L 350 50  L 390 52  L 420 53
+            Z
+          "
+          fill="rgba(255,255,255,0.04)"
+          stroke="rgba(255,255,255,0.18)"
+          strokeWidth="1.5"
+          strokeLinejoin="round"
+        />
 
-      {/* ── Main Landing Stage ── */}
-      <div className="relative max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-2 sm:pt-5 sm:pb-3 lg:pt-6 lg:pb-3 flex-1 flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+        {/* Country dots */}
+        {DBTA_COUNTRIES.map((country) => (
+          <g key={country.name}>
+            {/* Pulse ring */}
+            <circle
+              cx={country.cx}
+              cy={country.cy}
+              r={country.centres > 4 ? 14 : 10}
+              fill="none"
+              stroke={country.centres > 4 ? '#F5A623' : '#D32F2F'}
+              strokeWidth="1"
+              opacity="0.3"
+              className="map-pulse-ring"
+            />
+            {/* Main dot */}
+            <circle
+              cx={country.cx}
+              cy={country.cy}
+              r={country.centres > 4 ? 7 : country.centres > 2 ? 5.5 : 4}
+              fill={
+                hovered?.name === country.name
+                  ? '#ffffff'
+                  : country.centres > 4
+                  ? '#F5A623'
+                  : '#D32F2F'
+              }
+              stroke={hovered?.name === country.name ? '#F5A623' : 'rgba(255,255,255,0.5)'}
+              strokeWidth={hovered?.name === country.name ? 2 : 1}
+              className="cursor-pointer transition-all duration-200"
+              style={{
+                filter: hovered?.name === country.name
+                  ? 'drop-shadow(0 0 8px rgba(245,166,35,0.9))'
+                  : country.centres > 4
+                  ? 'drop-shadow(0 0 4px rgba(245,166,35,0.5))'
+                  : 'drop-shadow(0 0 3px rgba(211,47,47,0.4))',
+                transform: hovered?.name === country.name ? `scale(1.6)` : 'scale(1)',
+                transformOrigin: `${country.cx}px ${country.cy}px`,
+              }}
+              onMouseMove={(e) => handleMouseMove(e, country)}
+              onMouseLeave={() => setHovered(null)}
+            />
+          </g>
+        ))}
 
-          {/* ── Left Column: Editorial Manifesto ── */}
-          <div className="lg:col-span-7 space-y-3.5 sm:space-y-4">
-            {/* Eyebrow badge */}
+        {/* Tooltip rendered in SVG space */}
+        {hovered && (
+          <foreignObject
+            x={Math.min(tooltipPos.x + 12, 760)}
+            y={Math.max(tooltipPos.y - 70, 10)}
+            width="210"
+            height="90"
+            className="pointer-events-none overflow-visible"
+          >
             <div
-              className={`transition-all duration-500 ${
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              }`}
-              style={{ transitionDelay: '80ms' }}
+              className="bg-[#001a33] border border-white/20 rounded-xl px-3 py-2.5 shadow-2xl backdrop-blur-sm"
+              style={{ fontFamily: 'inherit' }}
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200/90 shadow-xs">
-                <span className="w-2 h-2 rounded-full bg-[#D32F2F] animate-pulse" />
-                <span className="text-[11px] sm:text-xs font-bold text-slate-800 tracking-wider uppercase">
-                  Continental TVET Network · 35 African Nations
-                </span>
+              <div className="flex items-center gap-1.5 mb-1">
+                <span className="w-2 h-2 rounded-full bg-[#F5A623] shrink-0" />
+                <span className="text-white font-bold text-sm leading-tight">{hovered.name}</span>
               </div>
+              <div className="text-[#F5A623] text-xs font-semibold mb-0.5">
+                {hovered.centres} TVET {hovered.centres === 1 ? 'Centre' : 'Centres'}
+              </div>
+              {hovered.trade && (
+                <div className="text-white/50 text-[10px] leading-snug">{hovered.trade}</div>
+              )}
+            </div>
+          </foreignObject>
+        )}
+      </svg>
+
+      {/* Legend */}
+      <div className={`absolute bottom-3 right-3 flex flex-col gap-1.5 transition-all duration-700 ${
+        mounted ? 'opacity-100' : 'opacity-0'
+      }`} style={{ transitionDelay: '1000ms' }}>
+        <div className="flex items-center gap-1.5">
+          <span className="w-3 h-3 rounded-full bg-[#F5A623] shadow-md shrink-0" />
+          <span className="text-[10px] text-white/50">5+ centres</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#D32F2F] shadow-md shrink-0" />
+          <span className="text-[10px] text-white/50">1–4 centres</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   HOME HERO
+   ═══════════════════════════════════════════ */
+export function HomeHero() {
+  const [mounted, setMounted] = useState(false);
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setWordIndex((prev) => (prev + 1) % WORDS.length);
+        setIsAnimating(false);
+      }, 380);
+    }, WORD_INTERVAL);
+    return () => clearInterval(timer);
+  }, []);
+
+  const centres = useCounter(119, 2200, mounted);
+  const nations  = useCounter(35,  1800, mounted);
+  const youth    = useCounter(45,  2400, mounted);
+
+  const scrollToContent = useCallback(() => {
+    document.getElementById('who-we-are')?.scrollIntoView({ behavior: 'smooth' });
+  }, []);
+
+  return (
+    <section
+      id="landing-hero"
+      className="relative min-h-screen flex flex-col overflow-hidden"
+      aria-label="Don Bosco Tech Africa — Landing"
+    >
+      {/* ── Backgrounds ── */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001020] via-[#001a33] to-[#002f55]" />
+      <div className="absolute inset-0 pointer-events-none opacity-50" style={{
+        background: 'radial-gradient(ellipse 70% 55% at 65% 45%, rgba(211,47,47,0.10) 0%, transparent 65%), radial-gradient(ellipse 50% 60% at 15% 70%, rgba(245,166,35,0.07) 0%, transparent 55%)',
+      }} />
+      {/* Grid lines */}
+      <div className="absolute inset-0 opacity-[0.035] pointer-events-none" style={{
+        backgroundImage: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)',
+        backgroundSize: '72px 72px',
+      }} />
+
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+        {PARTICLE_SEED.map((p, i) => (
+          <span key={i} className="landing-particle" style={{
+            left: `${p.left}%`, top: `${p.top}%`,
+            width: `${p.w}px`, height: `${p.w}px`,
+            animationDelay: `${p.delay}s`, animationDuration: `${p.dur}s`,
+            opacity: Number(p.op),
+          }} />
+        ))}
+      </div>
+
+      {/* ── Main two-column layout ── */}
+      <div className="relative z-10 flex-1 flex items-center max-w-[1300px] mx-auto px-5 sm:px-8 lg:px-12 w-full py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-6 xl:gap-12 items-center w-full">
+
+          {/* ── LEFT: Manifesto Text ── */}
+          <div className="space-y-6 sm:space-y-7 text-center lg:text-left">
+
+            {/* Eyebrow badge */}
+            <div className={`transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+              style={{ transitionDelay: '150ms' }}>
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/6 backdrop-blur-md text-white/70 text-xs sm:text-sm font-medium tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                Don Bosco Tech Africa · Est. 1980
+              </span>
             </div>
 
             {/* Headline */}
             <h1
-              className={`text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-extrabold text-slate-900 leading-[1.12] tracking-tight transition-all duration-700 ${
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              className={`text-[2.6rem] sm:text-[3.4rem] md:text-[4rem] lg:text-[3.8rem] xl:text-[4.4rem] font-extrabold text-white leading-[1.08] tracking-tight transition-all duration-700 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
-              style={{ transitionDelay: '180ms' }}
+              style={{ transitionDelay: '300ms' }}
             >
-              Transforming Africa&apos;s Youth Through{' '}
-              <span className="relative inline-block text-[#003366]">
-                Quality TVET
-                <span
-                  className="absolute -bottom-1 left-0 h-[3px] bg-[#D32F2F] rounded-full"
-                  style={{
-                    width: mounted ? '100%' : '0%',
-                    transition: 'width 0.75s cubic-bezier(0.22, 1, 0.36, 1)',
-                    transitionDelay: '0.7s',
-                  }}
-                />
+              We{' '}
+              <span
+                className={`inline-block transition-all duration-[380ms] ${
+                  isAnimating ? 'opacity-0 translate-y-4 blur-sm' : 'opacity-100 translate-y-0 blur-0'
+                }`}
+                style={{
+                  background: 'linear-gradient(135deg, #F5A623 20%, #D32F2F 85%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  minWidth: '4ch',
+                  display: 'inline-block',
+                }}
+              >
+                {WORDS[wordIndex]}
               </span>
+              <br />
+              <span className="text-white/90">Africa&apos;s Youth</span>
             </h1>
 
-            {/* Subheadline */}
-            <p
-              className={`text-base sm:text-lg text-slate-600 leading-relaxed max-w-[580px] font-normal transition-all duration-700 ${
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              }`}
-              style={{ transitionDelay: '280ms' }}
-            >
-              Coordinating <strong className="text-slate-900 font-semibold">119 Salesian TVET centres</strong> across{' '}
-              <strong className="text-slate-900 font-semibold">35 African countries and Madagascar</strong> — empowering over 45,000 marginalized young people every year with market-driven, green, and industrial skills for dignified employment.
+            {/* Sub-copy */}
+            <p className={`text-base sm:text-lg text-white/55 leading-relaxed max-w-[520px] mx-auto lg:mx-0 font-light transition-all duration-700 ${
+              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
+            }`} style={{ transitionDelay: '450ms' }}>
+              Quality technical and vocational education across{' '}
+              <span className="text-white/90 font-semibold">35 African nations</span> — building
+              skills, creating futures, transforming communities.
             </p>
 
-            {/* Primary Action Buttons */}
-            <div
-              className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 transition-all duration-700 ${
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              }`}
-              style={{ transitionDelay: '380ms' }}
-            >
+            {/* CTAs */}
+            <div className={`flex flex-col sm:flex-row items-center lg:items-start gap-3 sm:gap-4 transition-all duration-700 ${
+              mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'
+            }`} style={{ transitionDelay: '600ms' }}>
               <Link
                 href="/network"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#003366] hover:bg-[#002244] text-white font-bold text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white text-[#003366] font-bold text-sm sm:text-base transition-all duration-300 shadow-xl shadow-white/10 hover:shadow-2xl hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02]"
               >
-                <span>Explore Network Directory</span>
+                <span>Explore Our Network</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-
               <Link
                 href="/what-we-do"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm sm:text-base transition-all duration-300 shadow-xs hover:shadow-md hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full border border-white/20 hover:border-white/40 bg-white/6 hover:bg-white/12 backdrop-blur-sm text-white font-semibold text-sm sm:text-base transition-all duration-300 hover:-translate-y-0.5"
               >
-                <span>Our 5 Thematic Pillars</span>
-                <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
+                <span>What We Do</span>
+                <ChevronDown className="w-4 h-4 text-white/50 group-hover:text-white group-hover:translate-y-0.5 transition-all" />
               </Link>
             </div>
 
-            {/* Trust proof strip */}
-            <div
-              className={`flex items-center gap-5 pt-1 text-xs text-slate-500 font-medium transition-all duration-700 ${
-                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-              }`}
-              style={{ transitionDelay: '460ms' }}
-            >
-              <div className="flex items-center gap-1.5">
-                <Award className="w-3.5 h-3.5 text-[#D32F2F]" />
-                <span>Salesian Preventive System</span>
+            {/* Quick stat row under CTAs */}
+            <div className={`hidden sm:flex items-center gap-6 pt-2 transition-all duration-700 ${
+              mounted ? 'opacity-100' : 'opacity-0'
+            }`} style={{ transitionDelay: '800ms' }}>
+              <div className="text-center lg:text-left">
+                <div className="text-2xl font-black text-white tabular-nums">{centres}+</div>
+                <div className="text-[10px] text-white/35 uppercase tracking-wider font-medium">Centres</div>
               </div>
-              <div className="w-1 h-1 rounded-full bg-slate-300" />
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>Continental AU TVET Partner</span>
+              <div className="w-px h-8 bg-white/10" />
+              <div className="text-center lg:text-left">
+                <div className="text-2xl font-black text-white tabular-nums">{nations}</div>
+                <div className="text-[10px] text-white/35 uppercase tracking-wider font-medium">Nations</div>
               </div>
-            </div>
-          </div>
-
-          {/* ── Right Column: Dynamic Visual Showcase ── */}
-          <div
-            className={`lg:col-span-5 transition-all duration-700 ${
-              mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
-            }`}
-            style={{ transitionDelay: '220ms' }}
-          >
-            <div className="relative">
-              {/* Offset decorative frame */}
-              <div className="absolute -top-3 -right-3 w-full h-full rounded-2xl bg-[#003366]/5 border border-[#003366]/10 -z-10" />
-
-              {/* Main image container */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg bg-slate-100 img-zoom-wrap group border border-slate-200/80">
-                <Image
-                  src="https://dbtechafrica.org/wp-content/uploads/2026/04/Hands-On-Technical-Training.png"
-                  alt="Don Bosco TVET learners engaged in hands-on technical training"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 500px"
-                  className="object-cover group-hover:scale-103 transition-transform duration-700"
-                />
-
-                {/* Subtle vignette overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#001a33]/65 via-[#001a33]/15 to-transparent pointer-events-none" />
-
-                {/* Top Badge: Accredited Network */}
-                <div className="absolute top-3.5 left-3.5">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md shadow-xs border border-white/80">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[11px] font-bold text-slate-800">119 Accredited Centres</span>
-                  </div>
-                </div>
-
-                {/* Bottom floating badge: Real impact */}
-                <div className="absolute bottom-3.5 left-3.5 right-3.5">
-                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-white/80 flex items-center justify-between">
-                    <div>
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Graduate Employability
-                      </div>
-                      <div className="text-lg sm:text-xl font-black text-[#003366]">
-                        57% Direct Employment Rate
-                      </div>
-                    </div>
-                    <div className="w-8 h-8 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0">
-                      <Briefcase className="w-4 h-4 text-[#D32F2F]" />
-                    </div>
-                  </div>
-                </div>
+              <div className="w-px h-8 bg-white/10" />
+              <div className="text-center lg:text-left">
+                <div className="text-2xl font-black text-white tabular-nums">{youth}k+</div>
+                <div className="text-[10px] text-white/35 uppercase tracking-wider font-medium">Youth / year</div>
               </div>
             </div>
           </div>
 
+          {/* ── RIGHT: Interactive Africa Map ── */}
+          <div className={`relative h-[420px] sm:h-[520px] lg:h-[600px] xl:h-[680px] transition-all duration-1000 ${
+            mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+          }`} style={{ transitionDelay: '500ms' }}>
+
+            {/* Map label */}
+            <div className={`absolute top-0 left-0 z-10 flex items-center gap-2 transition-all duration-700 ${
+              mounted ? 'opacity-100' : 'opacity-0'
+            }`} style={{ transitionDelay: '900ms' }}>
+              <MapPin className="w-3.5 h-3.5 text-[#D32F2F]" />
+              <span className="text-[10px] sm:text-xs text-white/40 font-medium uppercase tracking-widest">
+                DBTA Presence · Hover to explore
+              </span>
+            </div>
+
+            <AfricaMap mounted={mounted} />
+          </div>
         </div>
       </div>
 
-      {/* ── Bottom Dock: Quick Pathway Gateways & Scroll Prompt ── */}
-      <div className="relative border-t border-slate-200/80 bg-slate-50/90 backdrop-blur-xs">
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
-            {QUICK_GATEWAYS.map((gateway, idx) => {
-              const Icon = gateway.icon;
-              return (
-                <Link
-                  key={idx}
-                  href={gateway.href}
-                  className="group flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/70 hover:border-[#003366]/40 shadow-xs hover:shadow-sm transition-all duration-200 hover:-translate-y-0.5"
-                >
-                  <div
-                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105"
-                    style={{ backgroundColor: `${gateway.color}12` }}
-                  >
-                    <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" style={{ color: gateway.color }} />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#003366] transition-colors truncate">
-                      {gateway.title}
-                    </p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate hidden sm:block">
-                      {gateway.subtitle}
-                    </p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Centered Scroll Indicator */}
-          <div className="flex justify-center mt-2 pt-1">
-            <button
-              onClick={scrollToNextSection}
-              aria-label="Scroll to discover who we are"
-              className="group inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 hover:text-[#003366] transition-colors cursor-pointer"
-            >
-              <span>Scroll to explore</span>
-              <ChevronDown className="w-3 h-3 text-slate-400 group-hover:text-[#003366] group-hover:translate-y-0.5 transition-all duration-200 animate-bounce" />
-            </button>
-          </div>
-        </div>
+      {/* ── Scroll prompt ── */}
+      <div className={`relative z-10 flex justify-center pb-6 transition-all duration-700 ${
+        mounted ? 'opacity-100' : 'opacity-0'
+      }`} style={{ transitionDelay: '1100ms' }}>
+        <button
+          onClick={scrollToContent}
+          aria-label="Scroll to discover who we are"
+          className="group flex flex-col items-center gap-2 cursor-pointer"
+        >
+          <span className="text-[10px] text-white/25 font-medium uppercase tracking-widest">
+            Discover More
+          </span>
+          <span className="w-5 h-9 rounded-full border border-white/15 flex items-start justify-center pt-1.5">
+            <span className="w-1 h-1 rounded-full bg-white/40 animate-bounce" />
+          </span>
+        </button>
       </div>
     </section>
   );
