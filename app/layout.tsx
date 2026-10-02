@@ -3,6 +3,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollRevealProvider } from '@/hooks/useScrollReveal';
+import { ScrollToTop } from '@/components/ui/ScrollToTop';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dbtechafrica.org'),
@@ -73,6 +74,7 @@ export default function RootLayout({
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
+          <ScrollToTop />
         </ScrollRevealProvider>
       </body>
     </html>
