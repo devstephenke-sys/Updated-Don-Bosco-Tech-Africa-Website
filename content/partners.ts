@@ -1,0 +1,68 @@
+import { Partner } from './types';
+
+export const partners: Partner[] = [
+  {
+    id: 'porticus',
+    name: 'Porticus',
+    category: 'Strategic Donor',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2022/06/porticuslogo.png',
+    description: 'International philanthropic organisation partnering on youth livelihoods, educational equity, and institutional capacity building.',
+    website: 'https://www.porticus.com',
+  },
+  {
+    id: 'jugend-eine-welt',
+    name: 'Jugend Eine Welt (J1W)',
+    category: 'Strategic Donor',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2023/05/j1w-logo-lang.bmp',
+    description: 'Austrian aid organisation dedicated to empowering disadvantaged youth globally through vocational education and development cooperation.',
+    website: 'https://www.jugendeinewelt.at',
+  },
+  {
+    id: 'don-bosco-mondo',
+    name: 'Don Bosco Mondo',
+    category: 'Strategic Donor',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2022/06/mondologo.png',
+    description: 'German development organisation committed to lifting youth out of poverty through education, vocational training, and green innovation.',
+    website: 'https://www.don-bosco-mondo.de',
+  },
+  {
+    id: 'don-bosco-nel-mondo',
+    name: 'Don Bosco Nel Mondo (DBN)',
+    category: 'International Network',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2022/06/dbn.png',
+    description: 'Salesian international solidarity foundation supporting marginalized youth in vocational education across the globe.',
+    website: 'https://www.donbosconelmondo.org',
+  },
+  {
+    id: 'evbb',
+    name: 'EVBB',
+    category: 'Technical Partner',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2023/05/EVBB-300x71.png',
+    description: 'European Association of Institutes for Vocational Training, facilitating intercontinental pedagogical exchange and TVET modernization.',
+    website: 'https://www.evbb.eu',
+  },
+  {
+    id: 'saam',
+    name: 'SAAM Consortium',
+    category: 'Technical Partner',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2022/06/LOGO-SAAM-2-300x129.png',
+    description: 'Sectoral Adaptation Action Model piloting pilot vocational mobility and pedagogical exchanges between Africa and Europe.',
+    website: 'https://saam.global',
+  },
+  {
+    id: 'cultivaid',
+    name: 'CultivAid',
+    category: 'Technical Partner',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2022/06/cultiveaidlogo.png',
+    description: 'Specialized agricultural technology and capacity-building NGO optimizing water conservation and high-tech agrometeorology in Africa.',
+    website: 'https://www.cultivaid.org',
+  },
+  {
+    id: 'worlddidac',
+    name: 'Worlddidac',
+    category: 'International Network',
+    logo: 'https://dbtechafrica.org/wp-content/uploads/2023/05/worlddidac_web-1.png',
+    description: 'Global trade association for the educational resources industry, supporting modern vocational workshop technologies and didactic equipment standards.',
+    website: 'https://worlddidac.org',
+  },
+];
