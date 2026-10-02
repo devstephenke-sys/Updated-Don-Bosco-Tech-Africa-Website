@@ -17,7 +17,7 @@ export function WhereWeWorkOverview() {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Visual Map Representation */}
-          <div className="lg:col-span-6 order-2 lg:order-1">
+          <div className="lg:col-span-6 order-2 lg:order-1 reveal reveal-left">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-white shadow-sm border border-slate-200/80">
               <Image
                 src="https://dbtechafrica.org/wp-content/uploads/2026/04/Pan-African-Network.png"
@@ -30,7 +30,7 @@ export function WhereWeWorkOverview() {
           </div>
 
           {/* Right Column: Editorial Network Summary */}
-          <div className="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          <div className="lg:col-span-6 order-1 lg:order-2 space-y-6 reveal reveal-right">
             <span className="text-xs md:text-sm font-bold tracking-widest text-[#D32F2F] uppercase block">
               OUR NETWORK
             </span>
@@ -50,9 +50,9 @@ export function WhereWeWorkOverview() {
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 {regionalBlocs.map((bloc, idx) => (
-                  <div key={idx} className="flex items-center gap-2 text-slate-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#003366] shrink-0" />
-                    <span className="font-semibold text-slate-900">{bloc.name}</span>
+                  <div key={idx} className="flex items-center gap-2 text-slate-700 group/bloc cursor-default">
+                    <span className="w-2 h-2 rounded-full bg-[#003366] shrink-0 transition-transform duration-200 group-hover/bloc:scale-125" style={{ backgroundColor: idx % 2 === 0 ? '#D32F2F' : '#003366' }} />
+                    <span className="font-semibold text-slate-900 group-hover/bloc:text-[#003366] transition-colors">{bloc.name}</span>
                     <span className="text-xs text-slate-400">({bloc.provinces})</span>
                   </div>
                 ))}
@@ -62,7 +62,7 @@ export function WhereWeWorkOverview() {
             <div className="pt-2">
               <Link
                 href="/network"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#003366] hover:bg-[#002244] text-white font-semibold text-sm transition-colors shadow-xs group"
+                className="group inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#003366] hover:bg-[#002244] text-white font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 shadow-sm hover:shadow-md"
               >
                 <span>Explore the Full Network Directory</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

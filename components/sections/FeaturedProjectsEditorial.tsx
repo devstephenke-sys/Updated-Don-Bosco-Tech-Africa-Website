@@ -8,7 +8,7 @@ export function FeaturedProjectsEditorial() {
     <section className="py-20 md:py-28 bg-slate-50 border-t border-slate-200/70" id="featured-projects">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-[680px]">
+          <div className="max-w-[680px] reveal">
             <span className="text-xs md:text-sm font-bold tracking-widest text-[#D32F2F] uppercase block mb-3">
               FEATURED PROGRAMMES
             </span>
@@ -30,8 +30,8 @@ export function FeaturedProjectsEditorial() {
         {/* Editorial Project Grid: 1 Large Hero Card + 2 Supporting Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           {/* Main Large Featured Project */}
-          <div className="lg:col-span-7 bg-white rounded-2xl overflow-hidden shadow-xs border border-slate-200/80 group">
-            <div className="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden">
+          <div className="lg:col-span-7 bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 group card-lift reveal reveal-left">
+            <div className="relative aspect-[16/10] w-full bg-slate-100 overflow-hidden img-zoom-wrap">
               <Image
                 src="https://dbtechafrica.org/wp-content/uploads/2026/04/Hands-On-Technical-Training.png"
                 alt="Green TVET and Solar PV Training"
@@ -69,9 +69,9 @@ export function FeaturedProjectsEditorial() {
           </div>
 
           {/* Supporting 2 Projects */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-6 reveal reveal-right">
             {/* Supporting 1 */}
-            <div className="bg-white rounded-2xl p-7 shadow-xs border border-slate-200/80 space-y-3 group hover:border-slate-300 transition-colors">
+            <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-200/80 space-y-3 group card-lift">
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-50 text-amber-800 text-xs font-bold uppercase tracking-wider">
                   Agribusiness
@@ -96,7 +96,7 @@ export function FeaturedProjectsEditorial() {
             </div>
 
             {/* Supporting 2 */}
-            <div className="bg-white rounded-2xl p-7 shadow-xs border border-slate-200/80 space-y-3 group hover:border-slate-300 transition-colors">
+            <div className="bg-white rounded-2xl p-7 shadow-sm border border-slate-200/80 space-y-3 group card-lift">
               <div className="flex items-center gap-2">
                 <span className="px-2.5 py-0.5 rounded-full bg-blue-50 text-blue-800 text-xs font-bold uppercase tracking-wider">
                   Youth Employment

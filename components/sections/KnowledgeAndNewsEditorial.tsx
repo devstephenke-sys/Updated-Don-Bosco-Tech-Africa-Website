@@ -10,7 +10,7 @@ export function KnowledgeAndNewsEditorial() {
   return (
     <section className="py-20 md:py-28 bg-slate-50 border-t border-slate-200/70" id="knowledge-news">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-16">
+        <div className="mb-16 reveal">
           <span className="text-xs md:text-sm font-bold tracking-widest text-[#D32F2F] uppercase block mb-3">
             INSIGHTS & UPDATES
           </span>
@@ -22,7 +22,7 @@ export function KnowledgeAndNewsEditorial() {
         {/* Two-Column Editorial Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
           {/* Left Column: Latest News */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-6 reveal reveal-left">
             <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <Newspaper className="w-5 h-5 text-[#003366]" />
@@ -39,7 +39,7 @@ export function KnowledgeAndNewsEditorial() {
 
             <div className="divide-y divide-slate-200">
               {latestNews.map((article) => (
-                <article key={article.id} className="py-6 first:pt-2 space-y-2 group">
+                <article key={article.id} className="py-6 first:pt-2 space-y-2 group card-lift rounded-lg px-1">
                   <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">
                     {article.publishedDate || article.publishDate} · {article.category}
                   </div>
@@ -66,7 +66,7 @@ export function KnowledgeAndNewsEditorial() {
           </div>
 
           {/* Right Column: Explore Knowledge Hub */}
-          <div className="lg:col-span-6 space-y-6">
+          <div className="lg:col-span-6 space-y-6 reveal reveal-right">
             <div className="flex items-center justify-between border-b border-slate-200 pb-4">
               <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 <FileText className="w-5 h-5 text-[#003366]" />

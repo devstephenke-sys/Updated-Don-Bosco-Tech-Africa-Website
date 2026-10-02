@@ -1,11 +1,15 @@
+/* ============================================
+   DBTA GLOBAL STYLES — Calm, Editorial, Alive
+   ============================================ */
 @import "tailwindcss";
 
 @layer base {
   :root {
     --background: #ffffff;
     --foreground: #0f172a;
+    --brand-red: #D32F2F;
     --brand-navy: #003366;
-    --brand-orange: #f97316;
+    --brand-gold: #F5A623;
     --muted-bg: #f8fafc;
     --card-border: #e2e8f0;
   }
@@ -30,17 +34,263 @@
   }
 }
 
-/* Clean, modern focus states */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+/* Focus states */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: 2px solid #003366;
   outline-offset: 2px;
 }
 
+/* ============================================
+   SCROLL-TRIGGERED REVEAL ANIMATIONS
+   ============================================ */
+
+/* Initial hidden state — elements start invisible and shifted down */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.reveal-left {
+  transform: translateX(-28px);
+}
+
+.reveal.reveal-right {
+  transform: translateX(28px);
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.96);
+}
+
+/* Visible state — triggered by IntersectionObserver */
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delays for child elements */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ============================================
+   HERO ANIMATIONS
+   ============================================ */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes drawLine {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes counterPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+.animate-hero-eyebrow {
+  animation: heroFadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+}
+
+.animate-hero-heading {
+  animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+}
+
+.animate-hero-body {
+  animation: heroFadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+.animate-hero-ctas {
+  animation: heroFadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both;
+}
+
+.animate-hero-image {
+  animation: slideInRight 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.animate-hero-fade {
+  animation: heroFadeIn 0.8s ease 0.15s both;
+}
+
+/* ============================================
+   STAT COUNTER ANIMATION
+   ============================================ */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(16px) scale(0.9); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.stat-number {
+  animation: countUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.stat-number-1 { animation-delay: 0.05s; }
+.stat-number-2 { animation-delay: 0.15s; }
+.stat-number-3 { animation-delay: 0.25s; }
+.stat-number-4 { animation-delay: 0.35s; }
+.stat-number-5 { animation-delay: 0.45s; }
+
+/* ============================================
+   THEMATIC ROW HOVER — Expanding accent bar
+   ============================================ */
+.thematic-row {
+  position: relative;
+  transition: background-color 0.25s ease;
+}
+
+.thematic-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--brand-red);
+  transform: scaleY(0);
+  transform-origin: center;
+  border-radius: 0 2px 2px 0;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.thematic-row:hover::before {
+  transform: scaleY(1);
+}
+
+/* ============================================
+   IMAGE ZOOM ON HOVER — Cards & Sections
+   ============================================ */
+.img-zoom-wrap {
+  overflow: hidden;
+}
+
+.img-zoom-wrap img,
+.img-zoom-wrap .next-image-wrapper {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.img-zoom-wrap:hover img {
+  transform: scale(1.04);
+}
+
+/* ============================================
+   CARD LIFT EFFECT
+   ============================================ */
+.card-lift {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.12),
+    0 4px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* ============================================
+   UNDERLINE SLIDE — Text links
+   ============================================ */
+.underline-slide {
+  position: relative;
+  display: inline-block;
+}
+
+.underline-slide::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--brand-red);
+  transition: width 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.underline-slide:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   PARTNER LOGO HOVER
+   ============================================ */
+.partner-logo {
+  transition: filter 0.35s ease, opacity 0.35s ease, transform 0.35s ease;
+  filter: grayscale(100%);
+  opacity: 0.55;
+}
+
+.partner-logo:hover {
+  filter: grayscale(0%);
+  opacity: 1;
+  transform: scale(1.06);
+}
+
+/* ============================================
+   QUOTE BLOCK DECORATION
+   ============================================ */
+@keyframes quoteFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   HERO IMAGE OVERLAY GRADIENT
+   ============================================ */
+.hero-img-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 51, 102, 0.12) 0%,
+    transparent 60%
+  );
+}
+
+/* ============================================
+   REDUCED MOTION RESPECT
+   ============================================ */
 @media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
+  *,
+  ::before,
+  ::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

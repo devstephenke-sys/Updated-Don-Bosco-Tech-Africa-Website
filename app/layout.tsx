@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollRevealProvider } from '@/hooks/useScrollReveal';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dbtechafrica.org'),
@@ -67,10 +68,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-orange-500 selection:text-white">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+      <body className="min-h-screen flex flex-col bg-white text-slate-900 font-sans">
+        <ScrollRevealProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ScrollRevealProvider>
       </body>
     </html>
   );
