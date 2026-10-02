@@ -13,7 +13,6 @@ import { NewsCard } from '@/components/cards/NewsCard';
 import { EventCard } from '@/components/cards/EventCard';
 import { ResourceCard } from '@/components/cards/ResourceCard';
 import { SectionHeader } from '@/components/layout/SectionHeader';
-import { Button } from '@/components/ui/Button';
 import {
   projects,
   impactStories,
@@ -22,13 +21,7 @@ import {
   knowledgeResources,
   aboutDBTA,
 } from '@/content';
-import {
-  ArrowRight,
-  Eye,
-  HeartHandshake,
-  CheckCircle2,
-  Building2,
-} from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 3);
@@ -38,121 +31,128 @@ export default function HomePage() {
   const featuredResources = knowledgeResources.slice(0, 3);
 
   return (
-    <div className="space-y-0">
+    <div className="bg-white text-neutral-900 selection:bg-neutral-900 selection:text-white">
       {/* 1. Hero Section */}
       <HomeHero />
 
-      {/* 2. Network Stats at a Glance */}
+      {/* 2. Key Impact Figures */}
       <StatsSection />
 
-      {/* 3. Who is DBTA? Section */}
-      <section className="py-20 bg-white">
+      {/* 3. About Don Bosco Tech Africa */}
+      <section className="py-20 md:py-28 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Visual Mosaic */}
-            <div className="lg:col-span-5 relative">
-              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100 aspect-4/3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Visual Column */}
+            <div className="lg:col-span-5 space-y-4">
+              <div className="relative aspect-[4/3] w-full border border-neutral-200 bg-neutral-100 overflow-hidden">
                 <Image
                   src="https://dbtechafrica.org/wp-content/uploads/2026/04/Pan-African-Network.png"
                   alt="Don Bosco TVET African Network"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 500px"
+                  sizes="(max-width: 1024px) 100vw, 480px"
                 />
               </div>
-
-              {/* Secretariat Location Badge */}
-              <div className="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
-                <Building2 className="w-5 h-5 text-blue-700 shrink-0" />
-                <div className="text-xs">
-                  <span className="font-bold text-slate-900 block">Secretariat Headquarters</span>
-                  <span className="text-slate-600">Applewood Adams, Ngong Road, Nairobi, Kenya</span>
-                </div>
+              <div className="p-4 border border-neutral-200 text-xs font-mono space-y-1">
+                <span className="font-bold text-neutral-900 block">
+                  Continental Secretariat Headquarters
+                </span>
+                <span className="text-neutral-500 block">
+                  Applewood Adams, Ngong Road, Nairobi, Kenya
+                </span>
               </div>
             </div>
 
-            {/* Narrative Info */}
+            {/* Narrative Column */}
             <div className="lg:col-span-7 space-y-6">
-              <div>
-                <span className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2 block">
-                  About the Network
+              <div className="space-y-2">
+                <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">
+                  About The Network
                 </span>
-                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                  Who is Don Bosco Tech Africa?
+                <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-neutral-900 leading-tight">
+                  Coordinating Salesian Technical Training Across Africa
                 </h2>
               </div>
 
-              <p className="text-base text-slate-600 leading-relaxed">
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed">
                 Don Bosco Tech Africa is the coordinating body for Salesian Technical and Vocational Education
-                and Training (TVET) centres in the Africa-Madagascar region. We coordinate{' '}
-                <strong>119 TVET institutions</strong> across{' '}
-                <strong>35 African countries</strong>, empowering young people
-                with demand-driven technical mastery and Salesian moral values.
+                and Training (TVET) centres across the Africa-Madagascar region. We unite{' '}
+                <strong className="text-neutral-950 font-semibold">119 TVET institutions</strong> in{' '}
+                <strong className="text-neutral-950 font-semibold">35 African nations</strong>, equipping youth with market-driven artisan skills, green technologies, and lifelong human values.
               </p>
 
-              {/* Vision & Mission Cards */}
+              {/* Vision & Mission blocks */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                  <div className="flex items-center gap-2 text-[#003366] font-bold text-sm">
-                    <Eye className="w-4 h-4" />
-                    <span>Our Vision</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                <div className="p-5 border border-neutral-200 space-y-2">
+                  <span className="text-xs font-mono uppercase tracking-wider font-semibold text-neutral-900 block">
+                    Our Vision
+                  </span>
+                  <p className="text-xs text-neutral-600 leading-relaxed italic">
                     "{aboutDBTA.vision}"
                   </p>
                 </div>
 
-                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
-                  <div className="flex items-center gap-2 text-orange-700 font-bold text-sm">
-                    <HeartHandshake className="w-4 h-4" />
-                    <span>Our Mission</span>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed">
+                <div className="p-5 border border-neutral-200 space-y-2">
+                  <span className="text-xs font-mono uppercase tracking-wider font-semibold text-neutral-900 block">
+                    Our Mission
+                  </span>
+                  <p className="text-xs text-neutral-600 leading-relaxed italic">
                     "{aboutDBTA.mission}"
                   </p>
                 </div>
               </div>
 
-              <div className="pt-2 flex flex-wrap items-center gap-3">
-                <Button href="/about" variant="primary" size="md">
-                  Who We Are
-                </Button>
-                <Button href="/about/board" variant="outline" size="md">
-                  Board & Governance
-                </Button>
+              <div className="pt-2 flex flex-wrap items-center gap-6">
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] transition-colors"
+                >
+                  <span>Institutional Overview</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+                <Link
+                  href="/about/board"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-500 hover:text-neutral-900 transition-colors"
+                >
+                  <span>Governance & Leadership</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. What We Do Across Africa */}
+      {/* 4. Strategic Focus Areas */}
       <ThematicStreams />
 
-      {/* 5. Signature Continental Network Explorer */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/80" id="network-explorer">
+      {/* 5. Continental TVET Network Explorer */}
+      <section className="py-20 md:py-28 border-t border-neutral-200" id="network-explorer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Interactive Directory"
             title="Continental TVET Network"
             subtitle="Explore 119 technical training institutions and provincial coordination across Africa and Madagascar."
           />
-
           <NetworkExplorer />
         </div>
       </section>
 
-      {/* 6. Flagship Projects & Programmes */}
-      <section className="py-20 bg-white border-t border-slate-200/80">
+      {/* 6. Flagship Programmes */}
+      <section className="py-20 md:py-28 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             eyebrow="Flagship Programmes"
             title="Multi-Country Projects"
-            subtitle="Key interventions in solar energy, digital skills, agriculture, and artisan certification."
+            subtitle="Strategic interventions in solar energy, digital certification, sustainable agriculture, and female artisan inclusion."
             action={
-              <Button href="/projects" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                All Projects
-              </Button>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] transition-colors"
+              >
+                <span>All Projects</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             }
           />
 
@@ -164,17 +164,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Success Stories & Human Impact */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/80">
+      {/* 7. Student & Graduate Impact */}
+      <section className="py-20 md:py-28 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Graduate Impact"
+            eyebrow="Human Impact"
             title="Student Success Stories"
-            subtitle="Real outcomes: how technical training empowers youth with dignified employment."
+            subtitle="Direct accounts of youth empowerment, technical excellence, and dignified employment across the continent."
             action={
-              <Button href="/stories" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                All Stories
-              </Button>
+              <Link
+                href="/stories"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] transition-colors"
+              >
+                <span>All Stories</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             }
           />
 
@@ -186,17 +190,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Knowledge Hub Highlight (Clean Light Theme) */}
-      <section className="py-20 bg-white border-t border-slate-200/80">
+      {/* 8. Knowledge Hub Highlight */}
+      <section className="py-20 md:py-28 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Publications & Research"
-            title="Knowledge Hub"
-            subtitle="Access policy briefs, green TVET manuals, tracer reports, and training toolkits."
+            eyebrow="Research & Policy"
+            title="Publications & Toolkits"
+            subtitle="Access policy briefs, tracer studies, green TVET curricula, and institutional toolkits."
             action={
-              <Button href="/knowledge" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
-                All Publications
-              </Button>
+              <Link
+                href="/knowledge"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] transition-colors"
+              >
+                <span>All Publications</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
             }
           />
 
@@ -208,16 +216,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. Latest News & Upcoming Events */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200/80">
+      {/* 9. News & Upcoming Events */}
+      <section className="py-20 md:py-28 border-t border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* News Col */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            {/* News Column */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                <h3 className="text-xl font-bold text-slate-900">Latest News</h3>
-                <Link href="/news" className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
-                  View All <ArrowRight className="w-3 h-3" />
+              <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+                <h3 className="text-xl font-bold text-neutral-900 tracking-tight">
+                  Latest News
+                </h3>
+                <Link
+                  href="/news"
+                  className="text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] flex items-center gap-1"
+                >
+                  <span>All News</span>
+                  <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
 
@@ -228,12 +242,18 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Events Col */}
+            {/* Events Column */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-                <h3 className="text-xl font-bold text-slate-900">Upcoming Events</h3>
-                <Link href="/events" className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
-                  Calendar <ArrowRight className="w-3 h-3" />
+              <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
+                <h3 className="text-xl font-bold text-neutral-900 tracking-tight">
+                  Upcoming Events
+                </h3>
+                <Link
+                  href="/events"
+                  className="text-xs font-semibold uppercase tracking-wider text-neutral-900 hover:text-[#003366] flex items-center gap-1"
+                >
+                  <span>Calendar</span>
+                  <ArrowRight className="w-3 h-3" />
                 </Link>
               </div>
 
@@ -247,28 +267,37 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. Partner & Donor Carousel */}
+      {/* 10. Strategic Partners */}
       <PartnerCarousel />
 
-      {/* 11. Digital Ecosystem Grid */}
+      {/* 11. Digital Ecosystem */}
       <DigitalEcosystemGrid />
 
-      {/* 12. Final Clean Light Call To Action */}
-      <section className="py-16 bg-white border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+      {/* 12. Minimal Editorial Call to Action */}
+      <section className="py-24 border-t border-neutral-200 bg-white">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5">
+          <span className="text-xs font-mono uppercase tracking-widest text-neutral-400">
+            Continental Collaboration
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">
             Partner With Don Bosco Tech Africa
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Collaborate with our continental secretariat on green energy, TVET curriculum upgrade, tracer studies, or youth skills development across 35 countries.
+          <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+            Collaborate with our continental secretariat on green energy transitions, TVET curriculum reform, tracer research, or youth artisan skills development across 35 countries.
           </p>
-          <div className="pt-2 flex items-center justify-center gap-3">
-            <Button href="/contact" variant="primary" size="md">
+          <div className="pt-3 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="px-6 py-3 bg-neutral-900 text-white text-xs font-mono uppercase tracking-wider hover:bg-neutral-800 transition-colors"
+            >
               Contact Secretariat
-            </Button>
-            <Button href="/opportunities" variant="outline" size="md">
+            </Link>
+            <Link
+              href="/opportunities"
+              className="px-6 py-3 border border-neutral-200 text-neutral-900 text-xs font-mono uppercase tracking-wider hover:bg-neutral-50 transition-colors"
+            >
               View Opportunities
-            </Button>
+            </Link>
           </div>
         </div>
       </section>

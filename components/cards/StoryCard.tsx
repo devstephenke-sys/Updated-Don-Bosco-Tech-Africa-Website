@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ImpactStory } from '@/content';
-import { Badge } from '../ui/Badge';
-import { ArrowRight, Quote, MapPin, Award } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 interface StoryCardProps {
   story: ImpactStory;
@@ -11,60 +10,55 @@ interface StoryCardProps {
 
 export function StoryCard({ story }: StoryCardProps) {
   return (
-    <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+    <article className="group flex flex-col justify-between border border-neutral-200 bg-white hover:border-neutral-400 transition-colors">
       <div>
         {/* Cover Photo */}
-        <div className="relative h-56 w-full overflow-hidden bg-slate-100">
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100">
           <Image
             src={story.coverImage}
             alt={story.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <div className="absolute top-4 left-4">
-            <Badge variant="orange" size="sm">
+          <div className="absolute top-3 left-3">
+            <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 bg-white/95 text-neutral-900 backdrop-blur-xs border border-neutral-200/80">
               {story.country}
-            </Badge>
+            </span>
           </div>
         </div>
 
-        {/* Story Metadata & Text */}
-        <div className="p-6 space-y-3">
-          <div className="flex items-center gap-2 text-xs text-slate-500">
-            <span className="font-bold text-slate-900">{story.protagonistName}</span>
-            <span>·</span>
-            <span className="text-orange-600 font-medium truncate">{story.role}</span>
+        {/* Content */}
+        <div className="p-6">
+          <div className="text-xs text-neutral-500 uppercase tracking-wider font-mono mb-2">
+            {story.protagonistName} — {story.role}
           </div>
 
-          <h3 className="text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-            <Link href={`/stories/${story.slug}`}>{story.title}</Link>
+          <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#003366] transition-colors leading-snug line-clamp-2">
+            <Link href={`/stories/${story.slug}`}>
+              {story.title}
+            </Link>
           </h3>
 
-          {/* Quote block */}
-          <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 relative">
-            <Quote className="w-4 h-4 text-orange-400 absolute top-2 right-2 opacity-50" />
-            <p className="text-xs text-slate-600 italic line-clamp-3 leading-relaxed">
-              "{story.quote}"
-            </p>
-          </div>
+          <p className="mt-3 text-sm text-neutral-600 line-clamp-3 leading-relaxed italic border-l-2 border-neutral-300 pl-3">
+            "{story.quote}"
+          </p>
 
-          <p className="text-xs text-slate-500 flex items-center gap-1 pt-1">
-            <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-            <span className="truncate">{story.centre}</span>
+          <p className="mt-4 text-xs text-neutral-500 font-mono">
+            {story.centre}
           </p>
         </div>
       </div>
 
-      <div className="p-6 pt-0">
+      <div className="px-6 pb-6 pt-2">
         <Link
           href={`/stories/${story.slug}`}
-          className="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-orange-500 text-slate-700 hover:text-white text-sm font-semibold transition-all group-hover:bg-orange-500 group-hover:text-white"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 group-hover:text-[#003366] group-hover:gap-2 transition-all uppercase tracking-wider"
         >
-          <span>Read Full Story</span>
-          <ArrowRight className="w-4 h-4" />
+          <span>Read Story</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

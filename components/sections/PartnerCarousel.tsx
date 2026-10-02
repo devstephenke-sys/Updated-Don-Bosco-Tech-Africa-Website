@@ -5,34 +5,35 @@ import { SectionHeader } from '../layout/SectionHeader';
 
 export function PartnerCarousel() {
   return (
-    <section className="py-20 md:py-24 bg-white border-y border-slate-100">
+    <section className="py-20 md:py-24 bg-white border-t border-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader
           eyebrow="Strategic Alliances"
-          title="Our Strategic Partners & Donors"
-          subtitle="Collaborating with leading international development agencies, philanthropic foundations, and technical associations to transform African TVET."
+          title="Partners & Donors"
+          subtitle="Collaborating with international development agencies, philanthropic foundations, and technical partners to advance African TVET."
         />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-center justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 border border-neutral-200 divide-x divide-y divide-neutral-200">
           {partners.map((partner) => (
             <div
               key={partner.id}
-              className="bg-slate-50/70 rounded-2xl p-6 border border-slate-200/80 hover:border-slate-300 hover:shadow-md transition-all duration-300 flex flex-col items-center text-center justify-between h-44 group"
+              className="p-8 flex flex-col items-center text-center justify-center min-h-[140px] hover:bg-neutral-50/50 transition-colors group"
             >
-              <div className="relative w-36 h-16 flex items-center justify-center">
+              <div className="relative w-32 h-14 flex items-center justify-center">
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={140}
-                  height={60}
-                  className="max-h-14 w-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+                  width={130}
+                  height={55}
+                  className="max-h-12 w-auto object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
                 />
               </div>
-
-              <div className="mt-2">
-                <p className="text-xs font-bold text-slate-800">{partner.name}</p>
-                <span className="text-[10px] text-slate-400 font-medium block">{partner.category}</span>
-              </div>
+              <p className="mt-3 text-xs font-semibold text-neutral-800 line-clamp-1">
+                {partner.name}
+              </p>
+              <span className="text-[10px] text-neutral-400 font-mono mt-0.5">
+                {partner.category}
+              </span>
             </div>
           ))}
         </div>

@@ -3,44 +3,64 @@
 @layer base {
   :root {
     --background: #ffffff;
-    --foreground: #0f172a;
-    --brand-navy: #003366;
-    --brand-orange: #f97316;
-    --muted-bg: #f8fafc;
-    --card-border: #e2e8f0;
+    --foreground: #111111;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #003366;
+    --accent-orange: #ea580c;
   }
 
   html {
     scroll-behavior: smooth;
     color-scheme: light;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    background-color: #ffffff;
+    color: #111111;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: #111111;
   }
 
   ::selection {
     background-color: #003366;
     color: #ffffff;
   }
+
+  /* Thin horizontal rule utility */
+  hr {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+  }
 }
 
-/* Clean, modern focus states */
-a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+/* Focus states */
+a:focus-visible, button:focus-visible {
   outline: 2px solid #003366;
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
+/* Remove all animations if user prefers */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
+}
+
+/* Link base style */
+a {
+  text-decoration: none;
+  color: inherit;
 }

@@ -2,8 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Project } from '@/content';
-import { Badge } from '../ui/Badge';
-import { ArrowRight, Users2, Globe2, Building2 } from 'lucide-react';
+import { ArrowUpRight, Globe2, Building2 } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -11,63 +10,54 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+    <article className="group flex flex-col justify-between border border-neutral-200 bg-white hover:border-neutral-400 transition-colors">
       <div>
         {/* Cover Image */}
-        <div className="relative h-52 w-full overflow-hidden bg-slate-100">
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100">
           <Image
             src={project.coverImage}
             alt={project.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
-          <div className="absolute top-4 left-4 flex gap-2">
-            <Badge variant="blue" size="sm">
+          <div className="absolute top-3 left-3">
+            <span className="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 bg-white/95 text-neutral-900 backdrop-blur-xs border border-neutral-200/80">
               {project.thematicArea}
-            </Badge>
-          </div>
-          <div className="absolute top-4 right-4">
-            <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-900/80 backdrop-blur-md text-white border border-white/20">
-              {project.status}
             </span>
           </div>
         </div>
 
         {/* Content */}
-        <div className="p-6 space-y-3">
-          <h3 className="text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-2">
-            <Link href={`/projects/${project.slug}`}>{project.title}</Link>
+        <div className="p-6">
+          <div className="flex items-center gap-3 text-xs text-neutral-500 font-mono mb-2">
+            <span>{project.status}</span>
+            <span>·</span>
+            <span>{project.targetCountries.length} Countries</span>
+          </div>
+
+          <h3 className="text-lg font-bold text-neutral-900 group-hover:text-[#003366] transition-colors leading-snug line-clamp-2">
+            <Link href={`/projects/${project.slug}`}>
+              {project.title}
+            </Link>
           </h3>
 
-          <p className="text-sm text-slate-600 line-clamp-3 leading-relaxed">
+          <p className="mt-3 text-sm text-neutral-600 line-clamp-3 leading-relaxed">
             {project.summary}
           </p>
-
-          {/* Metrics snippet */}
-          <div className="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs text-slate-500">
-            <div className="flex items-center gap-1.5">
-              <Globe2 className="w-3.5 h-3.5 text-orange-500 shrink-0" />
-              <span className="truncate">{project.targetCountries.length} Countries</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <Building2 className="w-3.5 h-3.5 text-blue-600 shrink-0" />
-              <span className="truncate">{project.targetCentresCount} TVET Centres</span>
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* Action footer */}
-      <div className="p-6 pt-0">
+      {/* Footer link */}
+      <div className="px-6 pb-6 pt-2">
         <Link
           href={`/projects/${project.slug}`}
-          className="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-blue-600 text-slate-700 hover:text-white text-sm font-semibold transition-all group-hover:bg-blue-600 group-hover:text-white"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-900 group-hover:text-[#003366] group-hover:gap-2 transition-all uppercase tracking-wider"
         >
-          <span>Explore Project Charter</span>
-          <ArrowRight className="w-4 h-4" />
+          <span>View Project</span>
+          <ArrowUpRight className="w-3.5 h-3.5" />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }
