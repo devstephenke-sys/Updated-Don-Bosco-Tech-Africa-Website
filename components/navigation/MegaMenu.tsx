@@ -7,21 +7,13 @@ import {
   Building2,
   Globe2,
   Users2,
-  GraduationCap,
-  Sparkles,
   Award,
-  SunMedium,
-  BookOpen,
+  Sparkles,
+  TrendingUp,
+  FileText,
   Newspaper,
   Calendar,
-  Briefcase,
-  FileText,
-  HelpCircle,
-  Wrench,
-  ShieldCheck,
-  TrendingUp,
-  MapPin,
-  ExternalLink,
+  Layers,
 } from 'lucide-react';
 
 export function MegaMenu() {
@@ -29,250 +21,129 @@ export function MegaMenu() {
 
   return (
     <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
-      {/* Home */}
-      <Link
-        href="/"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Home
-      </Link>
-
-      {/* About */}
+      {/* 1. About */}
       <div
-        className="relative group"
+        className="relative"
         onMouseEnter={() => setActiveMenu('about')}
         onMouseLeave={() => setActiveMenu(null)}
       >
         <button
-          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
           aria-expanded={activeMenu === 'about'}
         >
           <span>About</span>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:rotate-180 transition-transform duration-200" />
+          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-[#003366] transition-transform duration-200" />
         </button>
 
         {activeMenu === 'about' && (
-          <div className="absolute top-full left-0 w-[580px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Institutional Identity</p>
-                <div className="space-y-2">
-                  <Link
-                    href="/about"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Building2 className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Who We Are</p>
-                      <p className="text-xs text-slate-500">Continental Salesian TVET coordinating body</p>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/about/history"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Award className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Our History</p>
-                      <p className="text-xs text-slate-500">Salesian legacy & TVET modernization</p>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/about/mission-vision"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Sparkles className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Mission & Vision</p>
-                      <p className="text-xs text-slate-500">Core purpose and strategic horizon</p>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/about/values"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <ShieldCheck className="w-5 h-5 text-blue-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Our Core Values</p>
-                      <p className="text-xs text-slate-500">Integrity, professionalism & efficiency</p>
-                    </div>
-                  </Link>
+          <div className="absolute top-full left-0 w-[420px] bg-white rounded-2xl shadow-xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1">
+              <Link
+                href="/about"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <Building2 className="w-5 h-5 text-[#003366] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Who We Are</p>
+                  <p className="text-xs text-slate-500">Continental Salesian TVET coordinating body</p>
                 </div>
-              </div>
-
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Governance & Structure</p>
-                <div className="space-y-2">
-                  <Link
-                    href="/about/board"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Users2 className="w-5 h-5 text-orange-500 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">DBTA Board</p>
-                      <p className="text-xs text-slate-500">Board of Directors & Governance</p>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/about/p-tvet-network"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Globe2 className="w-5 h-5 text-orange-500 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">P-TVET Offices</p>
-                      <p className="text-xs text-slate-500">15 Provincial Coordinators across Africa</p>
-                    </div>
-                  </Link>
-                  <Link
-                    href="/about/governance"
-                    className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-blue-50/70 transition-colors group"
-                  >
-                    <Building2 className="w-5 h-5 text-orange-500 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">Executive Structure</p>
-                      <p className="text-xs text-slate-500">Secretariat & Operational Leadership</p>
-                    </div>
-                  </Link>
+              </Link>
+              <Link
+                href="/about/board"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <Users2 className="w-5 h-5 text-slate-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Board & Governance</p>
+                  <p className="text-xs text-slate-500">Board of Directors & executive oversight</p>
                 </div>
-              </div>
+              </Link>
+              <Link
+                href="/about/p-tvet-network"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <Globe2 className="w-5 h-5 text-slate-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">P-TVET Offices</p>
+                  <p className="text-xs text-slate-500">15 Provincial Coordinators across Africa</p>
+                </div>
+              </Link>
+              <Link
+                href="/about/history"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <Award className="w-5 h-5 text-slate-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Our History & Heritage</p>
+                  <p className="text-xs text-slate-500">Salesian legacy & TVET modernization</p>
+                </div>
+              </Link>
             </div>
           </div>
         )}
       </div>
 
-      {/* What We Do */}
-      <div
-        className="relative group"
-        onMouseEnter={() => setActiveMenu('what-we-do')}
-        onMouseLeave={() => setActiveMenu(null)}
+      {/* 2. What We Do */}
+      <Link
+        href="/what-we-do"
+        className="text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
       >
-        <button
-          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
-          aria-expanded={activeMenu === 'what-we-do'}
-        >
-          <span>What We Do</span>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:rotate-180 transition-transform duration-200" />
-        </button>
+        What We Do
+      </Link>
 
-        {activeMenu === 'what-we-do' && (
-          <div className="absolute top-full left-0 w-[620px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-6 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="grid grid-cols-2 gap-3">
-              <Link
-                href="/what-we-do#quality-tvet"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <Award className="w-5 h-5 text-blue-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Quality TVET & QMS</p>
-                  <p className="text-xs text-slate-500">Standardizing workshop curricula & audits</p>
-                </div>
-              </Link>
-              <Link
-                href="/what-we-do#employability-jso"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <Briefcase className="w-5 h-5 text-orange-500 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">Employability & JSO</p>
-                  <p className="text-xs text-slate-500">Job Service Offices & graduate tracer</p>
-                </div>
-              </Link>
-              <Link
-                href="/what-we-do#green-sustainable-tvet"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <SunMedium className="w-5 h-5 text-emerald-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-emerald-600">Green TVET & Solar</p>
-                  <p className="text-xs text-slate-500">Solar PV, water pumping & clean energy</p>
-                </div>
-              </Link>
-              <Link
-                href="/what-we-do#digital-skills"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <GraduationCap className="w-5 h-5 text-indigo-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-indigo-600">Digital Skills</p>
-                  <p className="text-xs text-slate-500">Automation, ICT & Cisco Academies</p>
-                </div>
-              </Link>
-              <Link
-                href="/what-we-do#recognition-of-prior-learning"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <Wrench className="w-5 h-5 text-purple-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-600">Recognition of Prior Learning</p>
-                  <p className="text-xs text-slate-500">Certifying informal artisans & workers</p>
-                </div>
-              </Link>
-              <Link
-                href="/what-we-do#capacity-building"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <Users2 className="w-5 h-5 text-amber-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-amber-600">Capacity Building</p>
-                  <p className="text-xs text-slate-500">Instructor upskilling & leadership seminars</p>
-                </div>
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* Network */}
+      {/* 3. Our Network */}
       <Link
         href="/network"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
+        className="text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
       >
         Our Network
       </Link>
 
-      {/* Projects */}
-      <Link
-        href="/projects"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Projects
-      </Link>
-
-      {/* Impact */}
+      {/* 4. Our Work */}
       <div
-        className="relative group"
-        onMouseEnter={() => setActiveMenu('impact')}
+        className="relative"
+        onMouseEnter={() => setActiveMenu('work')}
         onMouseLeave={() => setActiveMenu(null)}
       >
         <button
-          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
-          aria-expanded={activeMenu === 'impact'}
+          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+          aria-expanded={activeMenu === 'work'}
         >
-          <span>Impact</span>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:rotate-180 transition-transform duration-200" />
+          <span>Our Work</span>
+          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-[#003366] transition-transform duration-200" />
         </button>
 
-        {activeMenu === 'impact' && (
-          <div className="absolute top-full left-0 w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="space-y-2">
+        {activeMenu === 'work' && (
+          <div className="absolute top-full left-0 w-[380px] bg-white rounded-2xl shadow-xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1">
               <Link
-                href="/impact"
+                href="/projects"
                 className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
               >
-                <TrendingUp className="w-5 h-5 text-blue-600 mt-0.5" />
+                <Layers className="w-5 h-5 text-[#003366] mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Impact Indicators</p>
-                  <p className="text-xs text-slate-500">Continental results & metrics across 35 nations</p>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Flagship Projects</p>
+                  <p className="text-xs text-slate-500">Green TVET, Agriculture, and JSO programs</p>
                 </div>
               </Link>
               <Link
                 href="/stories"
                 className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
               >
-                <Sparkles className="w-5 h-5 text-orange-500 mt-0.5" />
+                <Sparkles className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">Success Stories</p>
-                  <p className="text-xs text-slate-500">Inspiring human stories from graduates & artisans</p>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Impact Stories</p>
+                  <p className="text-xs text-slate-500">Real outcomes from trainees and artisans</p>
+                </div>
+              </Link>
+              <Link
+                href="/impact"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <TrendingUp className="w-5 h-5 text-emerald-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Impact Indicators</p>
+                  <p className="text-xs text-slate-500">Continental benchmarks & tracer metrics</p>
                 </div>
               </Link>
             </div>
@@ -280,89 +151,89 @@ export function MegaMenu() {
         )}
       </div>
 
-      {/* Knowledge */}
-      <Link
-        href="/knowledge"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Knowledge Hub
-      </Link>
-
-      {/* News & Media */}
+      {/* 5. Knowledge */}
       <div
-        className="relative group"
+        className="relative"
+        onMouseEnter={() => setActiveMenu('knowledge')}
+        onMouseLeave={() => setActiveMenu(null)}
+      >
+        <button
+          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+          aria-expanded={activeMenu === 'knowledge'}
+        >
+          <span>Knowledge</span>
+          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-[#003366] transition-transform duration-200" />
+        </button>
+
+        {activeMenu === 'knowledge' && (
+          <div className="absolute top-full left-0 w-[380px] bg-white rounded-2xl shadow-xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1">
+              <Link
+                href="/knowledge"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <FileText className="w-5 h-5 text-[#003366] mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Publications & Research</p>
+                  <p className="text-xs text-slate-500">Policy briefs, manuals, and toolkits</p>
+                </div>
+              </Link>
+              <Link
+                href="/digital-services"
+                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+              >
+                <Globe2 className="w-5 h-5 text-blue-600 mt-0.5 shrink-0" />
+                <div>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Digital Services</p>
+                  <p className="text-xs text-slate-500">DBTVET, Digital Library, and Inserjeune</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 6. News & Media */}
+      <div
+        className="relative"
         onMouseEnter={() => setActiveMenu('news')}
         onMouseLeave={() => setActiveMenu(null)}
       >
         <button
-          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
+          className="flex items-center gap-1 text-sm font-semibold text-slate-700 hover:text-[#003366] px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
           aria-expanded={activeMenu === 'news'}
         >
           <span>News & Media</span>
-          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-blue-600 group-hover:rotate-180 transition-transform duration-200" />
+          <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-[#003366] transition-transform duration-200" />
         </button>
 
         {activeMenu === 'news' && (
-          <div className="absolute top-full left-0 w-[380px] bg-white rounded-2xl shadow-2xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-            <div className="space-y-2">
+          <div className="absolute top-full right-0 w-[360px] bg-white rounded-2xl shadow-xl border border-slate-100 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+            <div className="space-y-1">
               <Link
                 href="/news"
                 className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
               >
-                <Newspaper className="w-5 h-5 text-blue-600 mt-0.5" />
+                <Newspaper className="w-5 h-5 text-[#003366] mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-blue-600">Latest News</p>
-                  <p className="text-xs text-slate-500">Official updates, assemblies & milestones</p>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Latest News</p>
+                  <p className="text-xs text-slate-500">Official continental updates & milestones</p>
                 </div>
               </Link>
               <Link
                 href="/events"
                 className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
               >
-                <Calendar className="w-5 h-5 text-orange-500 mt-0.5" />
+                <Calendar className="w-5 h-5 text-orange-500 mt-0.5 shrink-0" />
                 <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-orange-600">Events & Assembly</p>
-                  <p className="text-xs text-slate-500">Annual Stakeholders Assembly & seminars</p>
-                </div>
-              </Link>
-              <Link
-                href="/media"
-                className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
-              >
-                <BookOpen className="w-5 h-5 text-purple-600 mt-0.5" />
-                <div>
-                  <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-600">Photo & Video Gallery</p>
-                  <p className="text-xs text-slate-500">Visual documentation from TVET workshops</p>
+                  <p className="text-sm font-semibold text-slate-800 group-hover:text-[#003366]">Events & Assemblies</p>
+                  <p className="text-xs text-slate-500">Upcoming gatherings & conferences</p>
                 </div>
               </Link>
             </div>
           </div>
         )}
       </div>
-
-      {/* Digital Services */}
-      <Link
-        href="/resources"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Digital Services
-      </Link>
-
-      {/* Opportunities */}
-      <Link
-        href="/opportunities"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Opportunities
-      </Link>
-
-      {/* Contact */}
-      <Link
-        href="/contact"
-        className="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors"
-      >
-        Contact
-      </Link>
     </nav>
   );
 }

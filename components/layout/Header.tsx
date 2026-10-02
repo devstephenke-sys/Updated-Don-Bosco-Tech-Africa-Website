@@ -74,8 +74,8 @@ export function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden sm:block">
-              <Button href="/network" variant="primary" size="sm" rightIcon={<ChevronRight className="w-4 h-4" />}>
-                Our Network
+              <Button href="/contact" variant="primary" size="sm" rightIcon={<ChevronRight className="w-4 h-4" />}>
+                Get Involved
               </Button>
             </div>
 

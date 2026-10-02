@@ -90,196 +90,148 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           Home
         </Link>
 
-        {/* About Accordion */}
+        {/* 1. About Accordion */}
         <div>
           <button
             onClick={() => toggleSection('about')}
             className="flex items-center justify-between w-full px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
           >
-            <span>About DBTA</span>
+            <span>About</span>
             {expandedSection === 'about' ? (
-              <ChevronDown className="w-5 h-5 text-blue-600" />
+              <ChevronDown className="w-5 h-5 text-[#003366]" />
             ) : (
               <ChevronRight className="w-5 h-5 text-slate-400" />
             )}
           </button>
 
           {expandedSection === 'about' && (
-            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-blue-600">
+            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-[#003366]">
               <Link
                 href="/about"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
                 Who We Are
               </Link>
               <Link
-                href="/about/history"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Our History
-              </Link>
-              <Link
-                href="/about/mission-vision"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Mission & Vision
-              </Link>
-              <Link
-                href="/about/values"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Our Core Values
-              </Link>
-              <Link
                 href="/about/board"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                DBTA Board of Directors
+                Board & Governance
               </Link>
               <Link
                 href="/about/p-tvet-network"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                Provincial TVET (P-TVET) Offices
+                P-TVET Offices
               </Link>
               <Link
-                href="/about/governance"
+                href="/about/history"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                Governance & Secretariat
+                Our History & Heritage
               </Link>
             </div>
           )}
         </div>
 
-        {/* What We Do Accordion */}
-        <div>
-          <button
-            onClick={() => toggleSection('what-we-do')}
-            className="flex items-center justify-between w-full px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-          >
-            <span>What We Do</span>
-            {expandedSection === 'what-we-do' ? (
-              <ChevronDown className="w-5 h-5 text-blue-600" />
-            ) : (
-              <ChevronRight className="w-5 h-5 text-slate-400" />
-            )}
-          </button>
+        {/* 2. What We Do */}
+        <Link
+          href="/what-we-do"
+          onClick={onClose}
+          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
+        >
+          What We Do
+        </Link>
 
-          {expandedSection === 'what-we-do' && (
-            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-blue-600">
-              <Link
-                href="/what-we-do#quality-tvet"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Quality TVET & QMS
-              </Link>
-              <Link
-                href="/what-we-do#employability-jso"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Employability & Job Placement
-              </Link>
-              <Link
-                href="/what-we-do#green-sustainable-tvet"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Green TVET & Solar
-              </Link>
-              <Link
-                href="/what-we-do#digital-skills"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Digital Skills
-              </Link>
-              <Link
-                href="/what-we-do#recognition-of-prior-learning"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Recognition of Prior Learning (RPL)
-              </Link>
-              <Link
-                href="/what-we-do#capacity-building"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Capacity Building
-              </Link>
-            </div>
-          )}
-        </div>
-
+        {/* 3. Our Network */}
         <Link
           href="/network"
           onClick={onClose}
           className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
         >
-          Our Continental Network
+          Our Network
         </Link>
 
-        <Link
-          href="/projects"
-          onClick={onClose}
-          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          Programmes & Projects
-        </Link>
-
-        {/* Impact */}
+        {/* 4. Our Work Accordion */}
         <div>
           <button
-            onClick={() => toggleSection('impact')}
+            onClick={() => toggleSection('work')}
             className="flex items-center justify-between w-full px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
           >
-            <span>Impact & Stories</span>
-            {expandedSection === 'impact' ? (
-              <ChevronDown className="w-5 h-5 text-blue-600" />
+            <span>Our Work</span>
+            {expandedSection === 'work' ? (
+              <ChevronDown className="w-5 h-5 text-[#003366]" />
             ) : (
               <ChevronRight className="w-5 h-5 text-slate-400" />
             )}
           </button>
 
-          {expandedSection === 'impact' && (
-            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-blue-600">
+          {expandedSection === 'work' && (
+            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-[#003366]">
               <Link
-                href="/impact"
+                href="/projects"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                Impact Overview & Indicators
+                Flagship Projects
               </Link>
               <Link
                 href="/stories"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                Success Stories & Testimonials
+                Impact Stories
+              </Link>
+              <Link
+                href="/impact"
+                onClick={onClose}
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
+              >
+                Impact Indicators
               </Link>
             </div>
           )}
         </div>
 
-        <Link
-          href="/knowledge"
-          onClick={onClose}
-          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          Knowledge Hub & Publications
-        </Link>
+        {/* 5. Knowledge Accordion */}
+        <div>
+          <button
+            onClick={() => toggleSection('knowledge')}
+            className="flex items-center justify-between w-full px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
+          >
+            <span>Knowledge</span>
+            {expandedSection === 'knowledge' ? (
+              <ChevronDown className="w-5 h-5 text-[#003366]" />
+            ) : (
+              <ChevronRight className="w-5 h-5 text-slate-400" />
+            )}
+          </button>
 
-        {/* News */}
+          {expandedSection === 'knowledge' && (
+            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-[#003366]">
+              <Link
+                href="/knowledge"
+                onClick={onClose}
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
+              >
+                Publications & Research
+              </Link>
+              <Link
+                href="/digital-services"
+                onClick={onClose}
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
+              >
+                Digital Services
+              </Link>
+            </div>
+          )}
+        </div>
+
+        {/* 6. News & Media Accordion */}
         <div>
           <button
             onClick={() => toggleSection('news')}
@@ -287,62 +239,43 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           >
             <span>News & Media</span>
             {expandedSection === 'news' ? (
-              <ChevronDown className="w-5 h-5 text-blue-600" />
+              <ChevronDown className="w-5 h-5 text-[#003366]" />
             ) : (
               <ChevronRight className="w-5 h-5 text-slate-400" />
             )}
           </button>
 
           {expandedSection === 'news' && (
-            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-blue-600">
+            <div className="pl-4 pr-2 py-2 space-y-1 bg-slate-50/70 rounded-xl mb-1 border-l-2 border-[#003366]">
               <Link
                 href="/news"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                News & Press Releases
+                Latest News
               </Link>
               <Link
                 href="/events"
                 onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
+                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-[#003366]"
               >
-                Events & Assembly
-              </Link>
-              <Link
-                href="/media"
-                onClick={onClose}
-                className="block py-2 px-3 text-sm font-medium text-slate-700 hover:text-blue-600"
-              >
-                Photo & Video Gallery
+                Events & Assemblies
               </Link>
             </div>
           )}
         </div>
 
-        <Link
-          href="/resources"
-          onClick={onClose}
-          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          Digital Services Ecosystem
-        </Link>
-
-        <Link
-          href="/opportunities"
-          onClick={onClose}
-          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          Opportunities & Vacancies
-        </Link>
-
-        <Link
-          href="/contact"
-          onClick={onClose}
-          className="flex items-center justify-between px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:bg-slate-50"
-        >
-          Contact DBTA
-        </Link>
+        {/* Action Button */}
+        <div className="pt-4 px-2">
+          <Link
+            href="/contact"
+            onClick={onClose}
+            className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-[#D32F2F] text-white font-bold text-sm shadow-xs"
+          >
+            <span>Get Involved</span>
+            <ChevronRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
 
       {/* External Portals Section */}
