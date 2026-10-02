@@ -133,46 +133,46 @@ export default function AboutPage() {
 
       {/* About Subpages Navigation Cards */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-12 border border-slate-800 space-y-8">
+        <div className="bg-slate-50 text-slate-900 rounded-3xl p-8 md:p-12 border border-slate-200 space-y-8">
           <div>
-            <span className="text-xs font-bold text-orange-400 uppercase tracking-wider block mb-1">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-1">
               Explore More
             </span>
-            <h3 className="text-2xl md:text-3xl font-bold text-white">Governance & Network Structure</h3>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Governance & Network Structure</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link
               href="/about/history"
-              className="p-5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors space-y-2 group"
+              className="p-5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 transition-colors space-y-2 group shadow-sm"
             >
-              <Award className="w-6 h-6 text-orange-400" />
-              <p className="text-base font-bold text-white group-hover:text-orange-400">Our History</p>
-              <p className="text-xs text-slate-400">Salesian TVET origins & milestone timeline</p>
+              <Award className="w-6 h-6 text-orange-500" />
+              <p className="text-base font-bold text-slate-900 group-hover:text-blue-600">Our History</p>
+              <p className="text-xs text-slate-500">Salesian TVET origins & milestone timeline</p>
             </Link>
             <Link
               href="/about/board"
-              className="p-5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors space-y-2 group"
+              className="p-5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 transition-colors space-y-2 group shadow-sm"
             >
-              <Users2 className="w-6 h-6 text-blue-400" />
-              <p className="text-base font-bold text-white group-hover:text-blue-400">DBTA Board</p>
-              <p className="text-xs text-slate-400">Board Chairman & governance directors</p>
+              <Users2 className="w-6 h-6 text-blue-600" />
+              <p className="text-base font-bold text-slate-900 group-hover:text-blue-600">DBTA Board</p>
+              <p className="text-xs text-slate-500">Board Chairman & governance directors</p>
             </Link>
             <Link
               href="/about/p-tvet-network"
-              className="p-5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors space-y-2 group"
+              className="p-5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 transition-colors space-y-2 group shadow-sm"
             >
-              <Globe2 className="w-6 h-6 text-emerald-400" />
-              <p className="text-base font-bold text-white group-hover:text-emerald-400">P-TVET Offices</p>
-              <p className="text-xs text-slate-400">15 Provincial TVET Coordinators across Africa</p>
+              <Globe2 className="w-6 h-6 text-emerald-600" />
+              <p className="text-base font-bold text-slate-900 group-hover:text-blue-600">P-TVET Offices</p>
+              <p className="text-xs text-slate-500">15 Provincial TVET Coordinators across Africa</p>
             </Link>
             <Link
               href="/about/governance"
-              className="p-5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-colors space-y-2 group"
+              className="p-5 rounded-2xl bg-white hover:bg-slate-100 border border-slate-200 transition-colors space-y-2 group shadow-sm"
             >
-              <Building2 className="w-6 h-6 text-purple-400" />
-              <p className="text-base font-bold text-white group-hover:text-purple-400">Secretariat</p>
-              <p className="text-xs text-slate-400">Executive operations & Nairobi office</p>
+              <Building2 className="w-6 h-6 text-indigo-600" />
+              <p className="text-base font-bold text-slate-900 group-hover:text-indigo-600">Secretariat</p>
+              <p className="text-xs text-slate-500">Executive operations & Nairobi office</p>
             </Link>
           </div>
         </div>

@@ -157,24 +157,24 @@ export default function WhatWeDoPage() {
       </section>
 
       {/* Call to Action for Partners & Funders */}
-      <section className="py-16 bg-slate-900 text-white">
+      <section className="py-16 bg-slate-50 border-t border-slate-200 text-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h3 className="text-2xl sm:text-3xl font-bold">
+          <h3 className="text-2xl sm:text-3xl font-bold text-slate-900">
             Partner With Us Across Any Thematic Stream
           </h3>
-          <p className="mt-3 text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+          <p className="mt-3 text-slate-600 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
             Collaborate with Don Bosco Tech Africa on green energy, curriculum upgrades, apprenticeships, tracer studies, or gender mainstreaming across 35 countries.
           </p>
-          <div className="mt-8 flex justify-center gap-4">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/contact?interest=partnership"
-              className="px-6 py-3 rounded-lg bg-brand-accent hover:bg-brand-accent/90 text-white font-semibold text-sm transition-all shadow-md"
+              className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm transition-all shadow-sm"
             >
               Initiate Partnership Discussion
             </Link>
             <Link
               href="/knowledge"
-              className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-sm transition-all"
+              className="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-semibold text-sm transition-all"
             >
               View Research & Reports
             </Link>

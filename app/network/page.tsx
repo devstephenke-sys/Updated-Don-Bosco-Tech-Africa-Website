@@ -119,38 +119,38 @@ export default function NetworkPage() {
               </div>
             </div>
 
-            <div className="lg:col-span-6 bg-slate-900 text-white p-8 sm:p-12 rounded-3xl relative overflow-hidden shadow-2xl">
+            <div className="lg:col-span-6 bg-slate-50 text-slate-900 p-8 sm:p-12 rounded-3xl relative overflow-hidden border border-slate-200 shadow-sm">
               <div className="relative z-10">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-gold">
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-600">
                   Quality Assurance
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white mt-2">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
                   Harmonized TVET Standards Across All Centres
                 </h3>
-                <p className="mt-4 text-slate-300 text-sm leading-relaxed">
+                <p className="mt-4 text-slate-600 text-sm leading-relaxed">
                   Regardless of whether a TVET centre is located in a capital city or a remote rural mission, every Don Bosco centre adheres to rigorous quality benchmarks:
                 </p>
 
                 <div className="mt-6 space-y-3">
                   <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-200">Accredited by national TVET regulatory authorities</span>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700">Accredited by national TVET regulatory authorities</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-200">Equipped with standard industrial tools and safety gear</span>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700">Equipped with standard industrial tools and safety gear</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-200">Dedicated Job Service Officer (JSO) for placement & tracing</span>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700">Dedicated Job Service Officer (JSO) for placement & tracing</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-200">Green TVET curriculum & renewable energy workshop integration</span>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700">Green TVET curriculum & renewable energy workshop integration</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <CheckCircle2 className="w-5 h-5 text-brand-accent shrink-0" />
-                    <span className="text-xs sm:text-sm text-slate-200">Gender-sensitive facilities and female enrollment scholarships</span>
+                    <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+                    <span className="text-xs sm:text-sm text-slate-700">Gender-sensitive facilities and female enrollment scholarships</span>
                   </div>
                 </div>
               </div>

@@ -66,98 +66,98 @@ export default function ImpactPage() {
       </section>
 
       {/* Inserjeune Tracer & Graduate Outcomes */}
-      <section className="py-20 bg-slate-900 text-white relative overflow-hidden">
+      <section className="py-20 bg-slate-50 border-y border-slate-200 text-slate-900 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6">
-              <span className="text-brand-gold text-xs font-bold uppercase tracking-wider">
+              <span className="text-blue-600 text-xs font-bold uppercase tracking-wider">
                 Inserjeune Platform Data
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold mt-2 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold mt-2 tracking-tight text-slate-900">
                 Traceable Youth Employment & Industry Alignment
               </h2>
-              <p className="mt-4 text-slate-300 text-base sm:text-lg leading-relaxed">
+              <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
                 Unlike conventional TVET institutions that stop tracking students at graduation, DBTA deploys the **Inserjeune Tracer Study System** across centres to measure real employment outcomes within 6 to 12 months post-training.
               </p>
 
               <div className="mt-8 space-y-4">
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                  <Briefcase className="w-6 h-6 text-brand-gold shrink-0 mt-1" />
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                  <Briefcase className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold text-white text-base">57%+ Placement & Self-Employment</h4>
-                    <p className="text-xs text-slate-300 mt-1">Graduates successfully transitioning into formal contracts or registered micro-enterprises.</p>
+                    <h4 className="font-bold text-slate-900 text-base">57%+ Placement & Self-Employment</h4>
+                    <p className="text-xs text-slate-600 mt-1">Graduates successfully transitioning into formal contracts or registered micro-enterprises.</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                  <Users className="w-6 h-6 text-brand-gold shrink-0 mt-1" />
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                  <Users className="w-6 h-6 text-blue-600 shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold text-white text-base">Dedicated Job Service Officers (JSOs)</h4>
-                    <p className="text-xs text-slate-300 mt-1">Institutionalised employment desks facilitating employer MoUs, industry visits, and mock interviews.</p>
+                    <h4 className="font-bold text-slate-900 text-base">Dedicated Job Service Officers (JSOs)</h4>
+                    <p className="text-xs text-slate-600 mt-1">Institutionalised employment desks facilitating employer MoUs, industry visits, and mock interviews.</p>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10">
-                  <Sun className="w-6 h-6 text-brand-gold shrink-0 mt-1" />
+                <div className="flex items-start gap-4 p-4 rounded-xl bg-white border border-slate-200 shadow-sm">
+                  <Sun className="w-6 h-6 text-orange-500 shrink-0 mt-1" />
                   <div>
-                    <h4 className="font-bold text-white text-base">Green & Solar Energy Skills</h4>
-                    <p className="text-xs text-slate-300 mt-1">Over 20+ centres equipped with certified solar PV test benches and certified renewable trainers.</p>
+                    <h4 className="font-bold text-slate-900 text-base">Green & Solar Energy Skills</h4>
+                    <p className="text-xs text-slate-600 mt-1">Over 20+ centres equipped with certified solar PV test benches and certified renewable trainers.</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="lg:col-span-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-6">Tracer System Core Indicators</h3>
+            <div className="lg:col-span-6 bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+              <h3 className="text-xl font-bold text-slate-900 mb-6">Tracer System Core Indicators</h3>
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between text-sm font-semibold mb-2">
-                    <span>Direct Employment Rate</span>
-                    <span className="text-brand-gold">57.4%</span>
+                    <span className="text-slate-700">Direct Employment Rate</span>
+                    <span className="text-blue-600 font-bold">57.4%</span>
                   </div>
-                  <div className="w-full bg-white/20 h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-brand-gold h-full rounded-full w-[57%]" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between text-sm font-semibold mb-2">
-                    <span>Female Enrollment in Non-Traditional Trades</span>
-                    <span className="text-brand-gold">32% (Target: 40%)</span>
-                  </div>
-                  <div className="w-full bg-white/20 h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-brand-accent h-full rounded-full w-[32%]" />
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div className="bg-blue-600 h-full rounded-full w-[57%]" />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-sm font-semibold mb-2">
-                    <span>Employer Satisfaction Index</span>
-                    <span className="text-brand-gold">88%</span>
+                    <span className="text-slate-700">Female Enrollment in Non-Traditional Trades</span>
+                    <span className="text-blue-600 font-bold">32% (Target: 40%)</span>
                   </div>
-                  <div className="w-full bg-white/20 h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-emerald-400 h-full rounded-full w-[88%]" />
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div className="bg-orange-500 h-full rounded-full w-[32%]" />
                   </div>
                 </div>
 
                 <div>
                   <div className="flex justify-between text-sm font-semibold mb-2">
-                    <span>Curriculum Harmonisation across 15 Provinces</span>
-                    <span className="text-brand-gold">85%</span>
+                    <span className="text-slate-700">Employer Satisfaction Index</span>
+                    <span className="text-emerald-600 font-bold">88%</span>
                   </div>
-                  <div className="w-full bg-white/20 h-2.5 rounded-full overflow-hidden">
-                    <div className="bg-blue-400 h-full rounded-full w-[85%]" />
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div className="bg-emerald-500 h-full rounded-full w-[88%]" />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between text-sm font-semibold mb-2">
+                    <span className="text-slate-700">Curriculum Harmonisation across 15 Provinces</span>
+                    <span className="text-blue-600 font-bold">85%</span>
+                  </div>
+                  <div className="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                    <div className="bg-blue-500 h-full rounded-full w-[85%]" />
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-slate-300">Powered by Inserjeune Tracer</span>
+              <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-xs text-slate-500">Powered by Inserjeune Tracer</span>
                 <a
                   href="https://dbtechafricatracer.org"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-bold text-brand-gold hover:text-white flex items-center gap-1 transition-colors"
+                  className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors"
                 >
                   Access Tracer Portal <ArrowRight className="w-3.5 h-3.5" />
                 </a>

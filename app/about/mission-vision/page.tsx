@@ -50,35 +50,35 @@ export default function MissionVisionPage() {
         </div>
 
         {/* Strategic Objectives */}
-        <div className="bg-slate-900 text-white rounded-3xl p-8 md:p-10 border border-slate-800 space-y-6">
-          <div className="flex items-center gap-2 text-orange-400 font-bold text-xs uppercase tracking-wider">
+        <div className="bg-slate-50 text-slate-900 rounded-3xl p-8 md:p-10 border border-slate-200 space-y-6">
+          <div className="flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-wider">
             <Target className="w-4 h-4" />
             <span>Strategic Pillars</span>
           </div>
-          <h3 className="text-2xl font-bold text-white">Our 4 Continental Commitments</h3>
+          <h3 className="text-2xl font-bold text-slate-900">Our 4 Continental Commitments</h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <p className="font-bold text-white text-sm">1. Demand-Driven Training Quality</p>
-              <p className="text-slate-300 leading-relaxed">
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1.5">
+              <p className="font-bold text-slate-900 text-sm">1. Demand-Driven Training Quality</p>
+              <p className="text-slate-600 leading-relaxed">
                 Continually revising technical curricula to meet industry needs in solar, automation, ICT, and civil trades.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <p className="font-bold text-white text-sm">2. School-to-Work Placement</p>
-              <p className="text-slate-300 leading-relaxed">
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1.5">
+              <p className="font-bold text-slate-900 text-sm">2. School-to-Work Placement</p>
+              <p className="text-slate-600 leading-relaxed">
                 Institutionalizing Job Service Offices (JSOs) and tracer systems to maximize graduate employment.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <p className="font-bold text-white text-sm">3. Green & Digital TVET Migration</p>
-              <p className="text-slate-300 leading-relaxed">
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1.5">
+              <p className="font-bold text-slate-900 text-sm">3. Green & Digital TVET Migration</p>
+              <p className="text-slate-600 leading-relaxed">
                 Pioneering renewable energy installations and digital skills across all Salesian TVET campuses.
               </p>
             </div>
-            <div className="p-4 rounded-xl bg-white/5 border border-white/10 space-y-1.5">
-              <p className="font-bold text-white text-sm">4. Advocacy & Continental Policy</p>
-              <p className="text-slate-300 leading-relaxed">
+            <div className="p-4 rounded-xl bg-white border border-slate-200 shadow-sm space-y-1.5">
+              <p className="font-bold text-slate-900 text-sm">4. Advocacy & Continental Policy</p>
+              <p className="text-slate-600 leading-relaxed">
                 Aligning institutional practice with the African Union Continental TVET Strategy 2025–2034.
               </p>
             </div>

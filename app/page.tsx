@@ -24,19 +24,16 @@ import {
 } from '@/content';
 import {
   ArrowRight,
-  Sparkles,
   Eye,
   HeartHandshake,
   CheckCircle2,
-  Globe2,
   Building2,
-  BookOpen,
 } from 'lucide-react';
 
 export default function HomePage() {
   const featuredProjects = projects.slice(0, 3);
   const featuredStories = impactStories.slice(0, 3);
-  const featuredNews = newsArticles.slice(0, 3);
+  const featuredNews = newsArticles.slice(0, 2);
   const upcomingEvents = dbtaEvents.slice(0, 2);
   const featuredResources = knowledgeResources.slice(0, 3);
 
@@ -49,12 +46,12 @@ export default function HomePage() {
       <StatsSection />
 
       {/* 3. Who is DBTA? Section */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Visual Mosaic */}
             <div className="lg:col-span-5 relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-slate-100 aspect-4/3">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-slate-100 aspect-4/3">
                 <Image
                   src="https://dbtechafrica.org/wp-content/uploads/2026/04/Pan-African-Network.png"
                   alt="Don Bosco TVET African Network"
@@ -64,64 +61,64 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Overlapping Emblem Badge */}
-              <div className="absolute -bottom-6 -right-4 md:-right-6 bg-slate-900 text-white p-5 rounded-2xl shadow-xl border border-slate-800 max-w-xs space-y-1 hidden sm:block">
-                <div className="flex items-center gap-2 text-orange-400 font-bold text-xs">
-                  <Building2 className="w-4 h-4" />
-                  <span>Continental Headquarters</span>
+              {/* Secretariat Location Badge */}
+              <div className="mt-4 p-4 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
+                <Building2 className="w-5 h-5 text-blue-700 shrink-0" />
+                <div className="text-xs">
+                  <span className="font-bold text-slate-900 block">Secretariat Headquarters</span>
+                  <span className="text-slate-600">Applewood Adams, Ngong Road, Nairobi, Kenya</span>
                 </div>
-                <p className="text-xs text-slate-300">Applewood Adams, Ngong Road, Nairobi, Kenya</p>
               </div>
             </div>
 
             {/* Narrative Info */}
             <div className="lg:col-span-7 space-y-6">
               <div>
-                <span className="text-xs md:text-sm font-bold tracking-wider text-orange-600 uppercase mb-2 block">
-                  Institutional Identity & Heritage
+                <span className="text-xs font-bold text-blue-800 uppercase tracking-wider mb-2 block">
+                  About the Network
                 </span>
-                <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
                   Who is Don Bosco Tech Africa?
                 </h2>
               </div>
 
-              <p className="text-base md:text-lg text-slate-700 leading-relaxed">
+              <p className="text-base text-slate-600 leading-relaxed">
                 Don Bosco Tech Africa is the coordinating body for Salesian Technical and Vocational Education
                 and Training (TVET) centres in the Africa-Madagascar region. We coordinate{' '}
-                <strong className="text-slate-900 font-semibold">119 TVET institutions</strong> across{' '}
-                <strong className="text-slate-900 font-semibold">35 African countries</strong>, empowering young people
+                <strong>119 TVET institutions</strong> across{' '}
+                <strong>35 African countries</strong>, empowering young people
                 with demand-driven technical mastery and Salesian moral values.
               </p>
 
               {/* Vision & Mission Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-100 space-y-2">
-                  <div className="flex items-center gap-2 text-blue-700 font-bold text-sm">
+                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                  <div className="flex items-center gap-2 text-[#003366] font-bold text-sm">
                     <Eye className="w-4 h-4" />
                     <span>Our Vision</span>
                   </div>
-                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     "{aboutDBTA.vision}"
                   </p>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-orange-50/70 border border-orange-100 space-y-2">
+                <div className="p-5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
                   <div className="flex items-center gap-2 text-orange-700 font-bold text-sm">
                     <HeartHandshake className="w-4 h-4" />
                     <span>Our Mission</span>
                   </div>
-                  <p className="text-xs text-slate-700 leading-relaxed font-medium">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     "{aboutDBTA.mission}"
                   </p>
                 </div>
               </div>
 
-              <div className="pt-4 flex flex-wrap items-center gap-4">
-                <Button href="/about" variant="primary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Learn More About DBTA
+              <div className="pt-2 flex flex-wrap items-center gap-3">
+                <Button href="/about" variant="primary" size="md">
+                  Who We Are
                 </Button>
                 <Button href="/about/board" variant="outline" size="md">
-                  Governance & Board
+                  Board & Governance
                 </Button>
               </div>
             </div>
@@ -133,12 +130,12 @@ export default function HomePage() {
       <ThematicStreams />
 
       {/* 5. Signature Continental Network Explorer */}
-      <section className="py-20 md:py-28 bg-white" id="network-explorer">
+      <section className="py-20 bg-slate-50 border-t border-slate-200/80" id="network-explorer">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Signature Interactive Feature"
-            title="Our Continental Network Explorer"
-            subtitle="Discover Salesian TVET institutions, key trade specializations, and provincial coordination across 35 African countries and Madagascar."
+            eyebrow="Interactive Directory"
+            title="Continental TVET Network"
+            subtitle="Explore 119 technical training institutions and provincial coordination across Africa and Madagascar."
           />
 
           <NetworkExplorer />
@@ -146,15 +143,15 @@ export default function HomePage() {
       </section>
 
       {/* 6. Flagship Projects & Programmes */}
-      <section className="py-20 md:py-28 bg-slate-50 border-t border-slate-200/60">
+      <section className="py-20 bg-white border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Measurable Actions"
-            title="Flagship Programmes & Projects"
-            subtitle="Structured multi-country interventions in renewable energy, digital fabrication, agriculture, and informal artisan accreditation."
+            eyebrow="Flagship Programmes"
+            title="Multi-Country Projects"
+            subtitle="Key interventions in solar energy, digital skills, agriculture, and artisan certification."
             action={
-              <Button href="/projects" variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                View All Programmes
+              <Button href="/projects" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+                All Projects
               </Button>
             }
           />
@@ -168,15 +165,15 @@ export default function HomePage() {
       </section>
 
       {/* 7. Success Stories & Human Impact */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Voices of Transformation"
-            title="Real Lives, Real Impact"
-            subtitle="From informal mechanics to certified solar entrepreneurs—discover how Salesian TVET equips African youth with sustainable careers."
+            eyebrow="Graduate Impact"
+            title="Student Success Stories"
+            subtitle="Real outcomes: how technical training empowers youth with dignified employment."
             action={
-              <Button href="/stories" variant="outline" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Read All Success Stories
+              <Button href="/stories" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+                All Stories
               </Button>
             }
           />
@@ -189,17 +186,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Knowledge Hub Highlight */}
-      <section className="py-20 md:py-28 bg-slate-900 text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 8. Knowledge Hub Highlight (Clean Light Theme) */}
+      <section className="py-20 bg-white border-t border-slate-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            eyebrow="Institutional Knowledge Hub"
-            title="Research, Publications & Toolkits"
-            subtitle="Open-access research papers, policy briefs, training manuals, and Quality Management System (QMS) frameworks published by DBTA."
-            className="[&>h2]:text-white [&>p]:text-slate-300"
+            eyebrow="Publications & Research"
+            title="Knowledge Hub"
+            subtitle="Access policy briefs, green TVET manuals, tracer reports, and training toolkits."
             action={
-              <Button href="/knowledge" variant="secondary" size="md" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                Explore Knowledge Hub
+              <Button href="/knowledge" variant="outline" size="sm" rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+                All Publications
               </Button>
             }
           />
@@ -213,38 +209,32 @@ export default function HomePage() {
       </section>
 
       {/* 9. Latest News & Upcoming Events */}
-      <section className="py-20 md:py-28 bg-white">
+      <section className="py-20 bg-slate-50 border-t border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* News Col (7 cols) */}
-            <div className="lg:col-span-7 space-y-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider block">News & Press</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Latest News</h3>
-                </div>
-                <Button href="/news" variant="ghost" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  All News
-                </Button>
+            {/* News Col */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 className="text-xl font-bold text-slate-900">Latest News</h3>
+                <Link href="/news" className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
+                  View All <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {featuredNews.slice(0, 2).map((article) => (
+                {featuredNews.map((article) => (
                   <NewsCard key={article.id} article={article} />
                 ))}
               </div>
             </div>
 
-            {/* Events Col (5 cols) */}
-            <div className="lg:col-span-5 space-y-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <span className="text-xs font-bold text-orange-600 uppercase tracking-wider block">Convocations</span>
-                  <h3 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Upcoming Events</h3>
-                </div>
-                <Button href="/events" variant="ghost" size="sm" rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Calendar
-                </Button>
+            {/* Events Col */}
+            <div className="lg:col-span-5 space-y-6">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <h3 className="text-xl font-bold text-slate-900">Upcoming Events</h3>
+                <Link href="/events" className="text-xs font-bold text-blue-700 hover:text-blue-900 flex items-center gap-1">
+                  Calendar <ArrowRight className="w-3 h-3" />
+                </Link>
               </div>
 
               <div className="space-y-4">
@@ -263,25 +253,21 @@ export default function HomePage() {
       {/* 11. Digital Ecosystem Grid */}
       <DigitalEcosystemGrid />
 
-      {/* 12. Final Continental Call To Action */}
-      <section className="py-20 md:py-28 bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-950 text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 relative z-10">
-          <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-orange-300 text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-4 h-4" /> Partner for Continental Transformation
-          </span>
-          <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight max-w-3xl mx-auto leading-tight">
-            Join Hands With Don Bosco Tech Africa
+      {/* 12. Final Clean Light Call To Action */}
+      <section className="py-16 bg-white border-t border-slate-200">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Partner With Don Bosco Tech Africa
           </h2>
-          <p className="text-base md:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
-            Whether you are a government agency, development donor, TVET institution, or industrial employer—collaborate
-            with us to build a skilled, self-reliant African youth.
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl mx-auto">
+            Collaborate with our continental secretariat on green energy, TVET curriculum upgrade, tracer studies, or youth skills development across 35 countries.
           </p>
-          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
-            <Button href="/contact" variant="secondary" size="lg" rightIcon={<ArrowRight className="w-5 h-5" />}>
-              Get in Touch with Secretariat
+          <div className="pt-2 flex items-center justify-center gap-3">
+            <Button href="/contact" variant="primary" size="md">
+              Contact Secretariat
             </Button>
-            <Button href="/opportunities" variant="white" size="lg">
-              Explore Opportunities
+            <Button href="/opportunities" variant="outline" size="md">
+              View Opportunities
             </Button>
           </div>
         </div>
