@@ -3,60 +3,128 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ChevronRight } from 'lucide-react';
+import {
+  ArrowRight,
+  ChevronRight,
+  ChevronDown,
+  Building2,
+  Leaf,
+  Briefcase,
+  Handshake,
+  Award,
+  Sparkles,
+} from 'lucide-react';
 
-const STATS = [
-  { value: '119', label: 'TVET Centres' },
-  { value: '35', label: 'Countries' },
-  { value: '45K+', label: 'Youth Annually' },
+const QUICK_GATEWAYS = [
+  {
+    icon: Building2,
+    title: '119 TVET Centres',
+    subtitle: '35 African Nations',
+    href: '/network',
+    color: '#003366',
+  },
+  {
+    icon: Leaf,
+    title: 'Green & Solar TVET',
+    subtitle: 'Clean energy trades',
+    href: '/what-we-do/green-tvet',
+    color: '#2D7D46',
+  },
+  {
+    icon: Briefcase,
+    title: 'Youth Employment',
+    subtitle: 'Job placement & RPL',
+    href: '/what-we-do/employability-jso',
+    color: '#D32F2F',
+  },
+  {
+    icon: Handshake,
+    title: 'Strategic Partners',
+    subtitle: 'Donors & institutions',
+    href: '/contact',
+    color: '#7B5EA7',
+  },
 ];
 
 export function HomeHero() {
   const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const scrollToNextSection = () => {
+    const el = document.getElementById('who-we-are');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
-    <section className="relative bg-white overflow-hidden" aria-label="DBTA Homepage Hero">
-      {/* Subtle grid pattern background */}
+    <section
+      className="relative min-h-[calc(100vh-125px)] flex flex-col justify-between bg-white overflow-hidden border-b border-slate-200/80"
+      aria-label="Don Bosco Tech Africa Landing"
+    >
+      {/* Subtle ambient lighting gradients */}
       <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
+        className="absolute top-0 right-0 w-[45vw] h-[45vw] max-w-[650px] max-h-[650px] rounded-full pointer-events-none opacity-40 blur-3xl -z-10"
         style={{
-          backgroundImage: 'linear-gradient(#003366 1px, transparent 1px), linear-gradient(90deg, #003366 1px, transparent 1px)',
-          backgroundSize: '64px 64px',
+          background: 'radial-gradient(circle, rgba(0, 51, 102, 0.08) 0%, transparent 70%)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-0 w-[35vw] h-[35vw] max-w-[500px] max-h-[500px] rounded-full pointer-events-none opacity-30 blur-3xl -z-10"
+        style={{
+          background: 'radial-gradient(circle, rgba(211, 47, 47, 0.06) 0%, transparent 70%)',
         }}
       />
 
-      {/* Decorative red accent — top right corner */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-[#D32F2F] opacity-[0.04] rounded-bl-full pointer-events-none" />
+      {/* Decorative Grid Texture */}
+      <div
+        className="absolute inset-0 opacity-[0.03] pointer-events-none -z-10"
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 1px 1px, #003366 1px, transparent 0)',
+          backgroundSize: '28px 28px',
+        }}
+      />
 
-      <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 md:pt-28 md:pb-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      {/* ── Main Landing Stage ── */}
+      <div className="relative max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-2 sm:pt-5 sm:pb-3 lg:pt-6 lg:pb-3 flex-1 flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
 
-          {/* ── Left Column: Copy ── */}
-          <div className="lg:col-span-6 xl:col-span-7 space-y-7">
-
-            {/* Eyebrow pill */}
-            <div className={`transition-all duration-500 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '80ms' }}>
-              <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#D32F2F]/8 border border-[#D32F2F]/20 text-[#D32F2F] text-xs font-bold tracking-[0.12em] uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#D32F2F] animate-pulse" />
-                Don Bosco Tech Africa
-              </span>
+          {/* ── Left Column: Editorial Manifesto ── */}
+          <div className="lg:col-span-7 space-y-3.5 sm:space-y-4">
+            {/* Eyebrow badge */}
+            <div
+              className={`transition-all duration-500 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+              }`}
+              style={{ transitionDelay: '80ms' }}
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-200/90 shadow-xs">
+                <span className="w-2 h-2 rounded-full bg-[#D32F2F] animate-pulse" />
+                <span className="text-[11px] sm:text-xs font-bold text-slate-800 tracking-wider uppercase">
+                  Continental TVET Network · 35 African Nations
+                </span>
+              </div>
             </div>
 
             {/* Headline */}
             <h1
-              className={`text-[42px] sm:text-5xl lg:text-[58px] font-extrabold text-slate-900 leading-[1.08] tracking-tight transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              className={`text-3xl sm:text-4xl lg:text-[44px] xl:text-[50px] font-extrabold text-slate-900 leading-[1.12] tracking-tight transition-all duration-700 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+              }`}
               style={{ transitionDelay: '180ms' }}
             >
-              Transforming Africa's Youth Through{' '}
+              Transforming Africa&apos;s Youth Through{' '}
               <span className="relative inline-block text-[#003366]">
                 Quality TVET
                 <span
                   className="absolute -bottom-1 left-0 h-[3px] bg-[#D32F2F] rounded-full"
                   style={{
                     width: mounted ? '100%' : '0%',
-                    transition: 'width 0.7s cubic-bezier(0.22, 1, 0.36, 1)',
+                    transition: 'width 0.75s cubic-bezier(0.22, 1, 0.36, 1)',
                     transitionDelay: '0.7s',
                   }}
                 />
@@ -65,85 +133,156 @@ export function HomeHero() {
 
             {/* Subheadline */}
             <p
-              className={`text-lg md:text-xl text-slate-600 leading-relaxed max-w-[580px] font-normal transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '300ms' }}
+              className={`text-base sm:text-lg text-slate-600 leading-relaxed max-w-[580px] font-normal transition-all duration-700 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+              }`}
+              style={{ transitionDelay: '280ms' }}
             >
-              Coordinating{' '}
-              <strong className="text-slate-800 font-semibold">119 Salesian TVET centres</strong>{' '}
-              across{' '}
-              <strong className="text-slate-800 font-semibold">35 African countries</strong>{' '}
-              — equipping young people with market-driven skills, values, and dignified livelihoods.
+              Coordinating <strong className="text-slate-900 font-semibold">119 Salesian TVET centres</strong> across{' '}
+              <strong className="text-slate-900 font-semibold">35 African countries and Madagascar</strong> — empowering over 45,000 marginalized young people every year with market-driven, green, and industrial skills for dignified employment.
             </p>
 
-            {/* CTA Buttons */}
+            {/* Primary Action Buttons */}
             <div
-              className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '420ms' }}
+              className={`flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1 transition-all duration-700 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+              }`}
+              style={{ transitionDelay: '380ms' }}
             >
               <Link
                 href="/network"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg bg-[#D32F2F] hover:bg-[#B71C1C] text-white font-semibold text-base transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#003366] hover:bg-[#002244] text-white font-bold text-sm sm:text-base transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
-                <span>Explore Our Network</span>
+                <span>Explore Network Directory</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
 
               <Link
                 href="/what-we-do"
-                className="group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-lg border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold text-base transition-all duration-300 hover:-translate-y-0.5"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-slate-200 hover:border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm sm:text-base transition-all duration-300 shadow-xs hover:shadow-md hover:-translate-y-0.5"
               >
-                <span>Discover Our Work</span>
+                <span>Our 5 Thematic Pillars</span>
                 <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
 
-            {/* Inline stats strip */}
+            {/* Trust proof strip */}
             <div
-              className={`flex items-center gap-8 pt-2 border-t border-slate-100 transition-all duration-700 ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDelay: '540ms' }}
+              className={`flex items-center gap-5 pt-1 text-xs text-slate-500 font-medium transition-all duration-700 ${
+                mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+              }`}
+              style={{ transitionDelay: '460ms' }}
             >
-              {STATS.map((stat, i) => (
-                <div key={i} className="text-center sm:text-left">
-                  <div className="text-2xl font-extrabold text-[#003366] tracking-tight">{stat.value}</div>
-                  <div className="text-xs text-slate-500 font-medium mt-0.5">{stat.label}</div>
-                </div>
-              ))}
+              <div className="flex items-center gap-1.5">
+                <Award className="w-3.5 h-3.5 text-[#D32F2F]" />
+                <span>Salesian Preventive System</span>
+              </div>
+              <div className="w-1 h-1 rounded-full bg-slate-300" />
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+                <span>Continental AU TVET Partner</span>
+              </div>
             </div>
           </div>
 
-          {/* ── Right Column: Image ── */}
+          {/* ── Right Column: Dynamic Visual Showcase ── */}
           <div
-            className={`lg:col-span-6 xl:col-span-5 transition-all duration-700 ${mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}
-            style={{ transitionDelay: '250ms' }}
+            className={`lg:col-span-5 transition-all duration-700 ${
+              mounted ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-6'
+            }`}
+            style={{ transitionDelay: '220ms' }}
           >
             <div className="relative">
-              {/* Offset decorative block behind the image */}
-              <div className="absolute -top-4 -right-4 w-full h-full rounded-2xl bg-[#003366]/6 border border-[#003366]/10" />
+              {/* Offset decorative frame */}
+              <div className="absolute -top-3 -right-3 w-full h-full rounded-2xl bg-[#003366]/5 border border-[#003366]/10 -z-10" />
 
-              {/* Main image */}
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[5/4] shadow-lg bg-slate-100 img-zoom-wrap">
+              {/* Main image container */}
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-lg bg-slate-100 img-zoom-wrap group border border-slate-200/80">
                 <Image
                   src="https://dbtechafrica.org/wp-content/uploads/2026/04/Hands-On-Technical-Training.png"
                   alt="Don Bosco TVET learners engaged in hands-on technical training"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 100vw, 560px"
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 500px"
+                  className="object-cover group-hover:scale-103 transition-transform duration-700"
                 />
-                {/* Subtle bottom gradient overlay */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#001a33]/40 to-transparent" />
 
-                {/* Caption badge */}
-                <div className="absolute bottom-4 left-4 right-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/90 backdrop-blur-sm shadow-sm border border-white/60">
-                    <div className="w-2 h-2 rounded-full bg-[#D32F2F] flex-shrink-0" />
-                    <span className="text-xs font-semibold text-slate-700">Salesian TVET Network — Hands-On Learning</span>
+                {/* Subtle vignette overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#001a33]/65 via-[#001a33]/15 to-transparent pointer-events-none" />
+
+                {/* Top Badge: Accredited Network */}
+                <div className="absolute top-3.5 left-3.5">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md shadow-xs border border-white/80">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[11px] font-bold text-slate-800">119 Accredited Centres</span>
+                  </div>
+                </div>
+
+                {/* Bottom floating badge: Real impact */}
+                <div className="absolute bottom-3.5 left-3.5 right-3.5">
+                  <div className="p-3 sm:p-3.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-white/80 flex items-center justify-between">
+                    <div>
+                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Graduate Employability
+                      </div>
+                      <div className="text-lg sm:text-xl font-black text-[#003366]">
+                        57% Direct Employment Rate
+                      </div>
+                    </div>
+                    <div className="w-8 h-8 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center shrink-0">
+                      <Briefcase className="w-4 h-4 text-[#D32F2F]" />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* ── Bottom Dock: Quick Pathway Gateways & Scroll Prompt ── */}
+      <div className="relative border-t border-slate-200/80 bg-slate-50/90 backdrop-blur-xs">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 py-3.5 sm:py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3">
+            {QUICK_GATEWAYS.map((gateway, idx) => {
+              const Icon = gateway.icon;
+              return (
+                <Link
+                  key={idx}
+                  href={gateway.href}
+                  className="group flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/70 hover:border-[#003366]/40 shadow-xs hover:shadow-sm transition-all duration-200 hover:-translate-y-0.5"
+                >
+                  <div
+                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 transition-transform duration-200 group-hover:scale-105"
+                    style={{ backgroundColor: `${gateway.color}12` }}
+                  >
+                    <Icon className="w-4 h-4 sm:w-4.5 sm:h-4.5" style={{ color: gateway.color }} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#003366] transition-colors truncate">
+                      {gateway.title}
+                    </p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-500 truncate hidden sm:block">
+                      {gateway.subtitle}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Centered Scroll Indicator */}
+          <div className="flex justify-center mt-2 pt-1">
+            <button
+              onClick={scrollToNextSection}
+              aria-label="Scroll to discover who we are"
+              className="group inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400 hover:text-[#003366] transition-colors cursor-pointer"
+            >
+              <span>Scroll to explore</span>
+              <ChevronDown className="w-3 h-3 text-slate-400 group-hover:text-[#003366] group-hover:translate-y-0.5 transition-all duration-200 animate-bounce" />
+            </button>
+          </div>
         </div>
       </div>
     </section>
