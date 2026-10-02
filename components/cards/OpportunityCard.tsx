@@ -12,7 +12,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
   const isOpen = opportunity.status === 'OPEN';
 
   return (
-    <div className="bg-white rounded-3xl p-6 md:p-8 border border-slate-200/80 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
+    <article className="bg-white rounded-2xl p-6 md:p-7 border border-slate-200/90 shadow-xs hover:shadow-md hover:border-blue-300 transition-all duration-200 flex flex-col justify-between group">
       <div className="space-y-4">
         {/* Header Badges */}
         <div className="flex items-center justify-between gap-2">
@@ -26,7 +26,7 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+        <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
           <Link href={`/opportunities/${opportunity.slug}`}>{opportunity.title}</Link>
         </h3>
 
@@ -64,9 +64,9 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
           className="inline-flex items-center justify-between w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-blue-600 text-slate-700 hover:text-white text-xs font-bold transition-all group-hover:bg-blue-600 group-hover:text-white"
         >
           <span>{isOpen ? 'View Details & Apply' : 'View Archived Opportunity'}</span>
-          <ArrowRight className="w-3.5 h-3.5" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
-    </div>
+    </article>
   );
 }

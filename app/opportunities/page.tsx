@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import { PageHero } from '@/components/hero/PageHero';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { opportunities } from '@/content/opportunities';
-import { OpportunityCard } from '@/components/cards/OpportunityCard';
-import { Briefcase, FileCheck, GraduationCap, Users } from 'lucide-react';
+import { OpportunitiesDirectory } from '@/components/opportunities/OpportunitiesDirectory';
 
 export const metadata: Metadata = {
   title: 'Opportunities, Careers & Tenders | Don Bosco Tech Africa',
@@ -11,9 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function OpportunitiesPage() {
-  const activeOpportunities = opportunities.filter((o) => o.status === 'Open');
-  const closedOpportunities = opportunities.filter((o) => o.status === 'Closed');
-
   return (
     <div>
       <PageHero
@@ -26,33 +22,14 @@ export default function OpportunitiesPage() {
       />
 
       <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
-            title="Open Calls & Vacancies"
-            subtitle="Current opportunities with the Don Bosco Tech Africa Secretariat and regional provincial offices."
+            title="Open Calls & Procurement Tenders"
+            subtitle="Current openings and expressions of interest with the Don Bosco Tech Africa Secretariat and regional provincial offices."
             badge="Current Calls"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            {activeOpportunities.map((opp) => (
-              <OpportunityCard key={opp.id} opportunity={opp} />
-            ))}
-          </div>
-
-          {closedOpportunities.length > 0 && (
-            <div className="mt-20">
-              <SectionHeader
-                title="Archived & Concluded Calls"
-                subtitle="Recently closed opportunities and award notices."
-                badge="Archive"
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                {closedOpportunities.map((opp) => (
-                  <OpportunityCard key={opp.id} opportunity={opp} />
-                ))}
-              </div>
-            </div>
-          )}
+          <OpportunitiesDirectory initialOpportunities={opportunities} />
         </div>
       </section>
 

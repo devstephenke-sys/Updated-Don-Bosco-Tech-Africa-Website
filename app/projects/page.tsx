@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import { PageHero } from '@/components/hero/PageHero';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { projects } from '@/content/projects';
-import { ProjectCard } from '@/components/cards/ProjectCard';
-import { Layers, CheckCircle2, Clock, Globe } from 'lucide-react';
+import { ProjectsDirectory } from '@/components/projects/ProjectsDirectory';
 
 export const metadata: Metadata = {
   title: 'Continental Projects & Initiatives | Don Bosco Tech Africa',
@@ -11,9 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const activeProjects = projects.filter((p) => p.status === 'Active');
-  const completedProjects = projects.filter((p) => p.status === 'Completed');
-
   return (
     <div>
       <PageHero
@@ -27,33 +23,14 @@ export default function ProjectsPage() {
 
       {/* Projects List */}
       <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
-            title="Active Flagship Projects"
-            subtitle="Current multi-stakeholder programmes operating across our 15 Salesian Provinces."
-            badge="Ongoing Programmes"
+            title="Flagship Continental Initiatives"
+            subtitle="Multi-stakeholder programmes operating across our 15 Salesian Provinces and 35 African countries."
+            badge="Programmes Directory"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            {activeProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-
-          {completedProjects.length > 0 && (
-            <div className="mt-20">
-              <SectionHeader
-                title="Completed & Institutionalised Initiatives"
-                subtitle="High-impact projects whose frameworks and best practices are now sustained across the network."
-                badge="Legacy & Scaled Impact"
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                {completedProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
-            </div>
-          )}
+          <ProjectsDirectory initialProjects={projects} />
         </div>
       </section>
 

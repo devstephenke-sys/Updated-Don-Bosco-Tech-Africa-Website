@@ -1,4 +1,6 @@
 import React from 'react';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 interface SectionHeaderProps {
   eyebrow?: string;
@@ -15,30 +17,33 @@ export function SectionHeader({
   badge,
   title,
   subtitle,
-  align = 'left',
+  align = 'center',
   className,
   action,
 }: SectionHeaderProps) {
-  const displayEyebrow = badge || eyebrow;
+  const displayBadge = badge || eyebrow;
+  const alignClass = {
+    left: 'text-left items-start',
+    center: 'text-center items-center mx-auto',
+    right: 'text-right items-end ml-auto',
+  }[align];
 
   return (
-    <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 pb-6 border-b border-[#e5e7eb] ${className ?? ''}`}>
-      <div className={align === 'center' ? 'text-center w-full' : ''}>
-        {displayEyebrow && (
-          <p className="text-xs font-semibold tracking-[0.12em] uppercase text-[#6b7280] mb-2">
-            {displayEyebrow}
-          </p>
-        )}
-        <h2 className="text-2xl md:text-3xl font-black text-[#111111] tracking-tight">
-          {title}
-        </h2>
-        {subtitle && (
-          <p className="mt-2 text-sm text-[#6b7280] leading-relaxed max-w-2xl">
-            {subtitle}
-          </p>
-        )}
-      </div>
-      {action && <div className="shrink-0">{action}</div>}
+    <div className={twMerge(clsx('flex flex-col mb-12 md:mb-16 max-w-3xl', alignClass, className))}>
+      {displayBadge && (
+        <span className="text-xs md:text-sm font-bold tracking-wider text-orange-600 uppercase mb-2 block">
+          {displayBadge}
+        </span>
+      )}
+      <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="mt-3 text-base md:text-lg text-slate-600 leading-relaxed max-w-2xl">
+          {subtitle}
+        </p>
+      )}
+      {action && <div className="mt-6">{action}</div>}
     </div>
   );
 }

@@ -2,8 +2,7 @@ import { Metadata } from 'next';
 import { PageHero } from '@/components/hero/PageHero';
 import { SectionHeader } from '@/components/layout/SectionHeader';
 import { events } from '@/content/events';
-import { EventCard } from '@/components/cards/EventCard';
-import { Calendar, Clock, MapPin, Users } from 'lucide-react';
+import { EventsDirectory } from '@/components/events/EventsDirectory';
 
 export const metadata: Metadata = {
   title: 'Events & Conferences | Don Bosco Tech Africa',
@@ -11,9 +10,6 @@ export const metadata: Metadata = {
 };
 
 export default function EventsPage() {
-  const upcomingEvents = events.filter((e) => e.status === 'Upcoming');
-  const pastEvents = events.filter((e) => e.status === 'Past');
-
   return (
     <div>
       <PageHero
@@ -26,33 +22,14 @@ export default function EventsPage() {
       />
 
       <section className="py-20 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
           <SectionHeader
-            title="Upcoming Gatherings & Workshops"
-            subtitle="Register for upcoming webinars, leadership forums, and regional technical summits."
-            badge="Calendar"
+            title="Continental Gatherings & Workshops"
+            subtitle="Explore upcoming webinars, leadership forums, and past regional technical summits."
+            badge="Calendar & Archive"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-
-          {pastEvents.length > 0 && (
-            <div className="mt-20">
-              <SectionHeader
-                title="Past Events & Conferences"
-                subtitle="Review past proceedings, workshop summaries, and continental communiqués."
-                badge="Archive"
-              />
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
-                {pastEvents.map((event) => (
-                  <EventCard key={event.id} event={event} />
-                ))}
-              </div>
-            </div>
-          )}
+          <EventsDirectory initialEvents={events} />
         </div>
       </section>
     </div>

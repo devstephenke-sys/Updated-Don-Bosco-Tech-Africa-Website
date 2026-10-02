@@ -18,32 +18,36 @@ export function PageHero({
   badge,
   children,
 }: PageHeroProps) {
-  const displayEyebrow = (typeof badge === 'string' ? badge : null) || eyebrow;
+  const displayBadge = badge || eyebrow;
 
   return (
-    <div className="border-b border-[#e5e7eb] bg-white">
+    <div className="bg-slate-50/70 border-b border-slate-200/80">
       {breadcrumbs && <Breadcrumbs items={breadcrumbs} />}
 
       <section className="py-12 md:py-16">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
-          <div className="max-w-3xl">
-            {displayEyebrow && (
-              <p className="text-xs font-semibold tracking-[0.12em] uppercase text-[#6b7280] mb-3">
-                {displayEyebrow}
-              </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl space-y-3">
+            {displayBadge && (
+              typeof displayBadge === 'string' ? (
+                <span className="inline-block text-xs font-bold tracking-wider text-blue-800 uppercase">
+                  {displayBadge}
+                </span>
+              ) : (
+                <div>{displayBadge}</div>
+              )
             )}
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#111111] tracking-tight leading-[1.1]">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               {title}
             </h1>
 
             {subtitle && (
-              <p className="mt-4 text-base sm:text-lg text-[#4b5563] leading-relaxed font-normal">
+              <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
                 {subtitle}
               </p>
             )}
 
-            {children && <div className="pt-4">{children}</div>}
+            {children && <div className="pt-3">{children}</div>}
           </div>
         </div>
       </section>
