@@ -8,7 +8,25 @@
   --color-brand-red: #D32F2F;
   --color-brand-gold: #F5A623;
   --color-brand-accent: #D32F2F;
+  --transition-duration-400: 400ms;
+  --transition-duration-800: 800ms;
 }
+
+/* Extend Tailwind with missing utilities */
+@layer utilities {
+  .duration-400 { transition-duration: 400ms; }
+  .duration-800 { transition-duration: 800ms; }
+  .scale-102 { transform: scale(1.02); }
+  .scale-103 { transform: scale(1.03); }
+
+  /* Sections as screen-height panels */
+  .section-panel {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+}
+
 
 @layer base {
   :root {
@@ -286,19 +304,6 @@ textarea:focus-visible {
 /* ============================================
    CINEMATIC LANDING HERO
    ============================================ */
-
-/* Map country dot pulse ring */
-.map-pulse-ring {
-  animation: mapPulse 2.5s ease-out infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-}
-
-@keyframes mapPulse {
-  0%   { r: 10; opacity: 0.45; }
-  70%  { r: 20; opacity: 0; }
-  100% { r: 10; opacity: 0; }
-}
 
 /* Floating particle dots */
 .landing-particle {

@@ -10,37 +10,43 @@ import { KnowledgeAndNewsEditorial } from '@/components/sections/KnowledgeAndNew
 import { PartnersQuietSection } from '@/components/sections/PartnersQuietSection';
 import { PartnerWithDBTACTA } from '@/components/sections/PartnerWithDBTACTA';
 
+export const metadata = {
+  title: 'Don Bosco Tech Africa — Continental TVET Network',
+  description:
+    'Coordinating 119 Salesian TVET centres across 35 African countries and Madagascar, empowering youth with market-driven skills, moral values, and employment pathways.',
+};
+
 export default function HomePage() {
   return (
-    <div className="space-y-0 bg-white">
-      {/* 1. Hero: Transforming Youth Potential Through Quality TVET */}
+    <div className="bg-white text-slate-900 selection:bg-[#003366] selection:text-white">
+      {/* ── 1. Editorial Hero: Clear Mission, Real Workshop Photography, Institutional Figures ── */}
       <HomeHero />
 
-      {/* 2. Who We Are: Human Institutional Introduction */}
+      {/* ── 2. The Continental Mission: Salesian Tradition & Practical Formation ── */}
       <WhoWeAreEditorial />
 
-      {/* 3. Network Snapshot: Quiet, Authoritative Information Band */}
+      {/* ── 3. Verified Continental Reach: Measurable TVET Outcomes ── */}
       <StatsSection />
 
-      {/* 4. Where We Work: High-Level Pan-African Network Overview */}
+      {/* ── 4. Where We Work: Continental TVET Network Directory & Regional Hubs ── */}
       <WhereWeWorkOverview />
 
-      {/* 5. What We Do: 5 Strategic Thematic Pillars */}
+      {/* ── 5. What We Do: 5 Core Strategic Pillars ── */}
       <ThematicStreams />
 
-      {/* 6. Featured Project: Large Editorial Feature + 2 Supporting Initiatives */}
+      {/* ── 6. Flagship Initiatives: Green Energy, Smart Agribusiness & RPL ── */}
       <FeaturedProjectsEditorial />
 
-      {/* 7. Impact Story: One Strong Human Story (From Training to Opportunity) */}
+      {/* ── 7. Real Human Outcomes: Spotlight on Solar Entrepreneur Esther Mwangi ── */}
       <ImpactStoryFeatured />
 
-      {/* 8. Knowledge & News: Two-Column Editorial Insights */}
+      {/* ── 8. Continental Knowledge & News: Policy Frameworks & Updates ── */}
       <KnowledgeAndNewsEditorial />
 
-      {/* 9. Partners: Quiet Logo Wall */}
+      {/* ── 9. Strategic Partners & Development Alliances ── */}
       <PartnersQuietSection />
 
-      {/* 10. Partner With DBTA: Strong, Dignified Institutional CTA */}
+      {/* ── 10. Institutional Invitation & Call to Action ── */}
       <PartnerWithDBTACTA />
     </div>
   );
