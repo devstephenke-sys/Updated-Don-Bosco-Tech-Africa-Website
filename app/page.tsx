@@ -1,48 +1,40 @@
 import React from 'react';
-import { KnowledgeHubHero } from '@/components/hero/KnowledgeHubHero';
-import { DigitalPortalsBento } from '@/components/sections/DigitalPortalsBento';
-import { KnowledgeRepositorySection } from '@/components/sections/KnowledgeRepositorySection';
-import { WhereWeWorkOverview } from '@/components/sections/WhereWeWorkOverview';
-import { ThematicStreams } from '@/components/sections/ThematicStreams';
-import { FeaturedProjectsEditorial } from '@/components/sections/FeaturedProjectsEditorial';
-import { KnowledgeAndNewsEditorial } from '@/components/sections/KnowledgeAndNewsEditorial';
+import { ObservatoryGatewayHero } from '@/components/hero/ObservatoryGatewayHero';
+import { RankingsSnapshotSection } from '@/components/sections/RankingsSnapshotSection';
+import { VocationalGatewaySection } from '@/components/sections/VocationalGatewaySection';
+import { ObservatoryNetworkGateway } from '@/components/sections/ObservatoryNetworkGateway';
+import { FeaturedResearchGateway } from '@/components/sections/FeaturedResearchGateway';
 import { PartnersQuietSection } from '@/components/sections/PartnersQuietSection';
 import { PartnerWithDBTACTA } from '@/components/sections/PartnerWithDBTACTA';
 
 export const metadata = {
-  title: 'Don Bosco Tech Africa — Continental TVET Knowledge Platform & Network Intelligence',
+  title: 'Don Bosco Tech Africa — Pan-African TVET Institutional Observatory & Knowledge Platform',
   description:
-    'The centralized information hub and technical repository coordinating 119 TVET institutions across 35 African countries. Access accredited curricula, policy research, graduate tracer data, and regional training centres.',
+    'The continental coordinating body benchmarked across 119 TVET institutions, 35 African countries, and 15 Salesian Provinces. Explore audited graduate employment rates, accredited vocational disciplines, and research tracer studies.',
 };
 
 export default function HomePage() {
   return (
     <div className="bg-white text-slate-900 selection:bg-[#003366] selection:text-white">
-      {/* ── 1. Knowledge Hub Hero: Search & Discovery, Taxonomy Filters, Operational Metrics ── */}
-      <KnowledgeHubHero />
+      {/* ── 1. Observatory Gateway Hero & Universal Search Terminal ── */}
+      <ObservatoryGatewayHero />
 
-      {/* ── 2. Continental Digital Services & Live Knowledge Gateways (Bento Deck) ── */}
-      <DigitalPortalsBento />
+      {/* ── 2. Continental TVET Benchmark Preview (Top 5 Ranked Institutions Snapshot) ── */}
+      <RankingsSnapshotSection />
 
-      {/* ── 3. Continental Knowledge Repository: Curricula, Policy Briefs & Toolkits ── */}
-      <KnowledgeRepositorySection />
+      {/* ── 3. Vocational Disciplines & Trade Pathways Gateway (QS Subject Rankings Model) ── */}
+      <VocationalGatewaySection />
 
-      {/* ── 4. Continental TVET Network Intelligence: 119 Centres Across 35 Countries ── */}
-      <WhereWeWorkOverview />
+      {/* ── 4. Pan-African TVET Architecture (Institutions, Provinces, Countries & Comparator) ── */}
+      <ObservatoryNetworkGateway />
 
-      {/* ── 5. Thematic TVET Transformation Pillars: 5 Strategic Focus Areas ── */}
-      <ThematicStreams />
+      {/* ── 5. Evidence & Policy Intelligence (Tracer Studies & Toolkits Gateway) ── */}
+      <FeaturedResearchGateway />
 
-      {/* ── 6. Flagship Continental Projects: Green Energy, Agribusiness & RPL ── */}
-      <FeaturedProjectsEditorial />
-
-      {/* ── 7. Continental News, Policy Briefs & Institutional Updates ── */}
-      <KnowledgeAndNewsEditorial />
-
-      {/* ── 8. International Development Partners & Donors ── */}
+      {/* ── 6. International Development Partners & Donors ── */}
       <PartnersQuietSection />
 
-      {/* ── 9. Institutional Engagement & Partnership Gateway ── */}
+      {/* ── 7. Continental Secretariat & Engagement Gateway ── */}
       <PartnerWithDBTACTA />
     </div>
   );

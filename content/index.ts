@@ -13,6 +13,8 @@ export * from './events';
 export * from './opportunities';
 export * from './digitalServices';
 export * from './partners';
+export * from './institutions';
+export * from './trades';
 
 import { countries } from './countries';
 import { provinces } from './provinces';
@@ -21,6 +23,8 @@ import { impactStories } from './stories';
 import { newsArticles } from './news';
 import { knowledgeResources } from './knowledge';
 import { opportunities } from './opportunities';
+import { institutions } from './institutions';
+import { trades } from './trades';
 
 export function getCountryBySlug(slug: string) {
   return countries.find((c) => c.slug === slug || c.code.toLowerCase() === slug.toLowerCase());
@@ -48,6 +52,18 @@ export function getOpportunityBySlug(slug: string) {
 
 export function getResourceBySlug(slug: string) {
   return knowledgeResources.find((k) => k.slug === slug);
+}
+
+export function getInstitutionBySlug(slug: string) {
+  return institutions.find((i) => i.slug === slug || i.id === slug);
+}
+
+export function getInstitutionById(id: string) {
+  return institutions.find((i) => i.id === id);
+}
+
+export function getTradeBySlug(slug: string) {
+  return trades.find((t) => t.slug === slug || t.id === slug);
 }
 
 export function searchGlobal(query: string) {

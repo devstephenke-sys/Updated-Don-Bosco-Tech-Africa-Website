@@ -230,3 +230,67 @@ export interface Partner {
   description: string;
   website: string;
 }
+
+export type AccreditationTier = 'Tier 1 - Center of Excellence' | 'Tier 2 - Regional Hub' | 'Accredited TVET Center';
+export type GreenRating = 'Gold' | 'Silver' | 'Bronze' | 'Standard';
+
+export interface InstitutionBenchmark {
+  id: string;
+  name: string;
+  shortName?: string;
+  slug: string;
+  city: string;
+  countryName: string;
+  countryCode: string;
+  flagEmoji: string;
+  provinceCode: string;
+  provinceName: string;
+  tier: AccreditationTier;
+  overallScore: number; // 0 - 100 benchmark score
+  rankBand: string; // e.g. '#1', '#2', 'Top 10%', 'Top 25%'
+  establishedYear: number;
+  metrics: {
+    employmentRate: number; // e.g. 84 (%)
+    annualTrainees: number; // e.g. 1250
+    femaleEnrollmentPct: number; // e.g. 42 (%)
+    greenTVETRating: GreenRating;
+    industryPartnerships: number; // e.g. 24
+    workshopQualityScore: number; // 0 - 100
+  };
+  keyTrades: string[];
+  tradeIds: string[];
+  facilities: string[];
+  accreditationBody: string;
+  leadPartners: string[];
+  contact: {
+    email: string;
+    phone: string;
+    website?: string;
+    address: string;
+  };
+  summary: string;
+  featured: boolean;
+}
+
+export interface TradeBenchmark {
+  id: string;
+  slug: string;
+  title: string;
+  shortTitle: string;
+  category: 'Clean Energy & Green' | 'Industrial Engineering' | 'Digital & ICT' | 'Agribusiness & Food' | 'Construction & Civil' | 'Hospitality & Services';
+  icon: string;
+  curriculumFramework: string;
+  averageEmploymentRate: number;
+  totalAccreditedCentres: number;
+  annualTraineesTrained: number;
+  topPerformingCentres: Array<{
+    institutionId: string;
+    institutionName: string;
+    countryName: string;
+    flagEmoji: string;
+    placementRate: number;
+  }>;
+  leadIndustryPartner: string;
+  description: string;
+  laborDemandOutlook: 'Very High' | 'High' | 'Expanding';
+}
