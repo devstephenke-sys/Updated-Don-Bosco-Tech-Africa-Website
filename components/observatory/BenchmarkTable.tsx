@@ -8,13 +8,18 @@ import {
   Search, 
   ArrowUpDown, 
   ChevronRight, 
+  ChevronDown,
   Award, 
   Leaf, 
   Briefcase, 
   Users, 
   SlidersHorizontal,
   CheckCircle2,
-  Scale
+  Scale,
+  RotateCcw,
+  Globe2,
+  Wrench,
+  ShieldCheck
 } from 'lucide-react';
 
 interface BenchmarkTableProps {
@@ -24,7 +29,7 @@ interface BenchmarkTableProps {
   showFilters?: boolean;
 }
 
-type SortField = 'overallScore' | 'employmentRate' | 'annualTrainees' | 'femaleEnrollmentPct';
+type SortOption = 'overallScore-desc' | 'overallScore-asc' | 'employment-desc' | 'trainees-desc' | 'female-desc';
 
 export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
   institutions,
@@ -33,10 +38,36 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
   showFilters = true,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [activeTab, setActiveTab] = useState<'all' | 'tier1' | 'green' | 'highEmployment' | 'eastern' | 'western'>('all');
-  const [sortField, setSortField] = useState<SortField>('overallScore');
-  const [sortAsc, setSortAsc] = useState(false);
+  
+  // Dropdown menu state
+  const [selectedProvince, setSelectedProvince] = useState<string>('all');
+  const [selectedTier, setSelectedTier] = useState<string>('all');
+  const [selectedTrade, setSelectedTrade] = useState<string>('all');
+  const [selectedGreenRating, setSelectedGreenRating] = useState<string>('all');
+  const [selectedMinEmployment, setSelectedMinEmployment] = useState<string>('all');
+  const [sortOption, setSortOption] = useState<SortOption>('overallScore-desc');
+  
   const [selectedForCompare, setSelectedForCompare] = useState<string[]>([]);
+
+  // Calculate active filter count
+  const activeFilterCount = [
+    selectedProvince !== 'all',
+    selectedTier !== 'all',
+    selectedTrade !== 'all',
+    selectedGreenRating !== 'all',
+    selectedMinEmployment !== 'all',
+    searchQuery.trim().length > 0,
+  ].filter(Boolean).length;
+
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setSelectedProvince('all');
+    setSelectedTier('all');
+    setSelectedTrade('all');
+    setSelectedGreenRating('all');
+    setSelectedMinEmployment('all');
+    setSortOption('overallScore-desc');
+  };
 
   const handleToggleCompare = (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -52,23 +83,56 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
     });
   };
 
+  // Derive unique trade options from institutions
+  const tradeOptions = useMemo(() => {
+    const tradeSet = new Set<string>();
+    institutions.forEach((inst) => {
+      inst.keyTrades.forEach((t) => tradeSet.add(t));
+    });
+    return Array.from(tradeSet).sort();
+  }, [institutions]);
+
+  // Derive unique province options
+  const provinceOptions = useMemo(() => {
+    const provMap = new Map<string, string>();
+    institutions.forEach((inst) => {
+      provMap.set(inst.provinceCode, `${inst.provinceName} (${inst.provinceCode})`);
+    });
+    return Array.from(provMap.entries()).sort();
+  }, [institutions]);
+
   const filteredAndSorted = useMemo(() => {
     let result = [...institutions];
 
-    // Filter by tab
-    if (activeTab === 'tier1') {
-      result = result.filter((i) => i.tier.includes('Center of Excellence'));
-    } else if (activeTab === 'green') {
-      result = result.filter((i) => i.metrics.greenTVETRating === 'Gold');
-    } else if (activeTab === 'highEmployment') {
-      result = result.filter((i) => i.metrics.employmentRate >= 80);
-    } else if (activeTab === 'eastern') {
-      result = result.filter((i) => i.provinceCode === 'AFE' || i.provinceCode === 'AGL');
-    } else if (activeTab === 'western') {
-      result = result.filter((i) => i.provinceCode === 'AOS' || i.provinceCode === 'AON');
+    // Filter by Province Dropdown
+    if (selectedProvince !== 'all') {
+      result = result.filter((i) => i.provinceCode === selectedProvince);
     }
 
-    // Filter by search query
+    // Filter by Accreditation Tier Dropdown
+    if (selectedTier !== 'all') {
+      result = result.filter((i) => i.tier === selectedTier);
+    }
+
+    // Filter by Trade Dropdown
+    if (selectedTrade !== 'all') {
+      result = result.filter((i) => 
+        i.keyTrades.some((t) => t.toLowerCase() === selectedTrade.toLowerCase())
+      );
+    }
+
+    // Filter by Green TVET Status Dropdown
+    if (selectedGreenRating !== 'all') {
+      result = result.filter((i) => i.metrics.greenTVETRating === selectedGreenRating);
+    }
+
+    // Filter by Minimum Employment Rate Dropdown
+    if (selectedMinEmployment !== 'all') {
+      const minRate = parseInt(selectedMinEmployment, 10);
+      result = result.filter((i) => i.metrics.employmentRate >= minRate);
+    }
+
+    // Filter by Search Query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       result = result.filter(
@@ -76,28 +140,27 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
           i.name.toLowerCase().includes(q) ||
           i.countryName.toLowerCase().includes(q) ||
           i.city.toLowerCase().includes(q) ||
+          i.provinceName.toLowerCase().includes(q) ||
           i.keyTrades.some((t) => t.toLowerCase().includes(q))
       );
     }
 
     // Sort
     result.sort((a, b) => {
-      let valA = 0;
-      let valB = 0;
-      if (sortField === 'overallScore') {
-        valA = a.overallScore;
-        valB = b.overallScore;
-      } else if (sortField === 'employmentRate') {
-        valA = a.metrics.employmentRate;
-        valB = b.metrics.employmentRate;
-      } else if (sortField === 'annualTrainees') {
-        valA = a.metrics.annualTrainees;
-        valB = b.metrics.annualTrainees;
-      } else if (sortField === 'femaleEnrollmentPct') {
-        valA = a.metrics.femaleEnrollmentPct;
-        valB = b.metrics.femaleEnrollmentPct;
+      switch (sortOption) {
+        case 'overallScore-desc':
+          return b.overallScore - a.overallScore;
+        case 'overallScore-asc':
+          return a.overallScore - b.overallScore;
+        case 'employment-desc':
+          return b.metrics.employmentRate - a.metrics.employmentRate;
+        case 'trainees-desc':
+          return b.metrics.annualTrainees - a.metrics.annualTrainees;
+        case 'female-desc':
+          return b.metrics.femaleEnrollmentPct - a.metrics.femaleEnrollmentPct;
+        default:
+          return b.overallScore - a.overallScore;
       }
-      return sortAsc ? valA - valB : valB - valA;
     });
 
     if (limit) {
@@ -105,80 +168,153 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
     }
 
     return result;
-  }, [institutions, activeTab, searchQuery, sortField, sortAsc, limit]);
-
-  const handleSort = (field: SortField) => {
-    if (sortField === field) {
-      setSortAsc(!sortAsc);
-    } else {
-      setSortField(field);
-      setSortAsc(false);
-    }
-  };
+  }, [
+    institutions, 
+    selectedProvince, 
+    selectedTier, 
+    selectedTrade, 
+    selectedGreenRating, 
+    selectedMinEmployment, 
+    searchQuery, 
+    sortOption, 
+    limit
+  ]);
 
   return (
     <div className="w-full">
-      {/* ── Filters & Search Header ── */}
+      {/* ── Dropdown Filters & Search Terminal ── */}
       {showFilters && (
-        <div className="mb-6 space-y-4">
+        <div className="mb-6 bg-white p-5 rounded-xl border border-slate-200 shadow-2xs space-y-4">
+          {/* Top Line: Search Bar + Filter Status */}
           <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
-            {/* Search Box */}
-            <div className="relative flex-1 max-w-md">
+            <div className="relative flex-1">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
-                placeholder="Search TVET center, country, or trade..."
+                placeholder="Search TVET center, country, city, or trade..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-all shadow-sm"
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-all"
               />
             </div>
 
-            {/* Indicator Quick Filters */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 text-xs font-medium">
+            {/* Active filter count & reset */}
+            {activeFilterCount > 0 && (
               <button
-                onClick={() => setActiveTab('all')}
-                className={`px-3 py-1.5 rounded-full transition-all whitespace-nowrap ${
-                  activeTab === 'all'
-                    ? 'bg-[#003366] text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
+                onClick={handleResetFilters}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200 hover:bg-rose-100 transition-colors shrink-0"
               >
-                All Centres ({institutions.length})
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Reset Filters ({activeFilterCount})</span>
               </button>
-              <button
-                onClick={() => setActiveTab('tier1')}
-                className={`px-3 py-1.5 rounded-full transition-all whitespace-nowrap flex items-center gap-1.5 ${
-                  activeTab === 'tier1'
-                    ? 'bg-amber-600 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                <Award className="w-3.5 h-3.5" />
-                Centres of Excellence
-              </button>
-              <button
-                onClick={() => setActiveTab('green')}
-                className={`px-3 py-1.5 rounded-full transition-all whitespace-nowrap flex items-center gap-1.5 ${
-                  activeTab === 'green'
-                    ? 'bg-emerald-700 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                <Leaf className="w-3.5 h-3.5" />
-                Gold Green TVET
-              </button>
-              <button
-                onClick={() => setActiveTab('highEmployment')}
-                className={`px-3 py-1.5 rounded-full transition-all whitespace-nowrap flex items-center gap-1.5 ${
-                  activeTab === 'highEmployment'
-                    ? 'bg-blue-700 text-white shadow-sm'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                <Briefcase className="w-3.5 h-3.5" />
-                Employment ≥80%
-              </button>
+            )}
+          </div>
+
+          {/* Bottom Grid: Dropdown Selectors (QS / THE Style) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 pt-2 border-t border-slate-100 text-xs">
+            {/* 1. Region / Province Dropdown */}
+            <div className="relative">
+              <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Region / Province
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedProvince}
+                  onChange={(e) => setSelectedProvince(e.target.value)}
+                  className="w-full appearance-none bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 font-medium py-2.5 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-colors cursor-pointer"
+                >
+                  <option value="all">All Provinces (Continental)</option>
+                  {provinceOptions.map(([code, label]) => (
+                    <option key={code} value={code}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* 2. Accreditation Tier Dropdown */}
+            <div className="relative">
+              <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Accreditation Tier
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedTier}
+                  onChange={(e) => setSelectedTier(e.target.value)}
+                  className="w-full appearance-none bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 font-medium py-2.5 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-colors cursor-pointer"
+                >
+                  <option value="all">All Accreditation Tiers</option>
+                  <option value="Tier 1 - Center of Excellence">Tier 1: Center of Excellence (CoE)</option>
+                  <option value="Tier 2 - Regional Hub">Tier 2: Regional Hub</option>
+                  <option value="Accredited TVET Center">Accredited TVET Center</option>
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* 3. Trade / Discipline Dropdown */}
+            <div className="relative">
+              <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Vocational Trade
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedTrade}
+                  onChange={(e) => setSelectedTrade(e.target.value)}
+                  className="w-full appearance-none bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 font-medium py-2.5 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-colors cursor-pointer"
+                >
+                  <option value="all">All Vocational Trades</option>
+                  {tradeOptions.map((trade) => (
+                    <option key={trade} value={trade}>
+                      {trade}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* 4. Green TVET Rating Dropdown */}
+            <div className="relative">
+              <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Green TVET Status
+              </label>
+              <div className="relative">
+                <select
+                  value={selectedGreenRating}
+                  onChange={(e) => setSelectedGreenRating(e.target.value)}
+                  className="w-full appearance-none bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-800 font-medium py-2.5 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-colors cursor-pointer"
+                >
+                  <option value="all">All Green Ratings</option>
+                  <option value="Gold">Gold Rating (Renewable Leader)</option>
+                  <option value="Silver">Silver Rating</option>
+                  <option value="Bronze">Bronze Rating</option>
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+              </div>
+            </div>
+
+            {/* 5. Sort By Dropdown */}
+            <div className="relative">
+              <label className="block text-[11px] font-semibold text-slate-500 uppercase tracking-wider mb-1">
+                Sort Rankings By
+              </label>
+              <div className="relative">
+                <select
+                  value={sortOption}
+                  onChange={(e) => setSortOption(e.target.value as SortOption)}
+                  className="w-full appearance-none bg-blue-50/70 hover:bg-blue-50 border border-blue-200 text-[#003366] font-bold py-2.5 pl-3 pr-8 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#003366] focus:border-transparent transition-colors cursor-pointer"
+                >
+                  <option value="overallScore-desc">Index Score (Highest First)</option>
+                  <option value="employment-desc">Placement Rate (Highest First)</option>
+                  <option value="trainees-desc">Annual Trainees (Highest First)</option>
+                  <option value="female-desc">Female Inclusion % (Highest First)</option>
+                  <option value="overallScore-asc">Index Score (Lowest First)</option>
+                </select>
+                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#003366] pointer-events-none" />
+              </div>
             </div>
           </div>
         </div>
@@ -194,33 +330,15 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
                 <th className="py-3.5 px-4">TVET Institution & Campus</th>
                 <th className="py-3.5 px-4">Country & Province</th>
                 <th className="py-3.5 px-4">Key Accredited Trades</th>
-                <th 
-                  className="py-3.5 px-4 cursor-pointer hover:bg-slate-100 transition-colors select-none text-right"
-                  onClick={() => handleSort('employmentRate')}
-                >
-                  <div className="flex items-center justify-end gap-1">
-                    <span>Placement %</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
+                <th className="py-3.5 px-4 text-right">
+                  <span>Placement %</span>
                 </th>
-                <th 
-                  className="py-3.5 px-4 cursor-pointer hover:bg-slate-100 transition-colors select-none text-right"
-                  onClick={() => handleSort('annualTrainees')}
-                >
-                  <div className="flex items-center justify-end gap-1">
-                    <span>Trainees</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-slate-400" />
-                  </div>
+                <th className="py-3.5 px-4 text-right">
+                  <span>Trainees</span>
                 </th>
                 <th className="py-3.5 px-4 text-center">Green TVET</th>
-                <th 
-                  className="py-3.5 px-4 cursor-pointer hover:bg-slate-100 transition-colors select-none text-right"
-                  onClick={() => handleSort('overallScore')}
-                >
-                  <div className="flex items-center justify-end gap-1">
-                    <span>Index Score</span>
-                    <ArrowUpDown className="w-3.5 h-3.5 text-[#003366]" />
-                  </div>
+                <th className="py-3.5 px-4 text-right font-bold text-[#003366]">
+                  <span>Index Score</span>
                 </th>
                 <th className="py-3.5 px-4 text-center">Action</th>
               </tr>
@@ -230,8 +348,14 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
                 <tr>
                   <td colSpan={9} className="py-12 text-center text-slate-500">
                     <Building2 className="w-8 h-8 text-slate-300 mx-auto mb-2" />
-                    <p className="font-medium">No TVET institutions match the selected criteria.</p>
-                    <p className="text-xs text-slate-400 mt-1">Try resetting search filters or keywords.</p>
+                    <p className="font-medium text-slate-700">No TVET institutions match the selected dropdown filters.</p>
+                    <p className="text-xs text-slate-400 mt-1">Try resetting the dropdown filters or adjusting the search keywords.</p>
+                    <button
+                      onClick={handleResetFilters}
+                      className="mt-3 px-3 py-1.5 rounded-lg text-xs font-semibold text-[#003366] bg-blue-50 hover:bg-blue-100 border border-blue-200 transition-colors"
+                    >
+                      Reset All Filters
+                    </button>
                   </td>
                 </tr>
               ) : (
@@ -266,7 +390,7 @@ export const BenchmarkTable: React.FC<BenchmarkTableProps> = ({
                             {item.name}
                           </Link>
                           {isTier1 && (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200 uppercase tracking-wider">
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200 uppercase tracking-wider shrink-0">
                               <Award className="w-3 h-3 text-amber-600" />
                               CoE
                             </span>
